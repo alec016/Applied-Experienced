@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cell_componentstoragetier[index=2, nameprefix=4k, bytes=4096, idledrain=1.0, componentsupplier=appeng.items.storage.storagetier$$lambda/0x0000022daeccb370@613b8633]": {
+      "conditions": {
+        "items": [
+          {
+            "items": "appex:experience_storage_cell_4k"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_experience_housing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "appex:experience_cell_housing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "appex:experience_storage_cell_4k"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cell_componentstoragetier[index=2, nameprefix=4k, bytes=4096, idledrain=1.0, componentsupplier=appeng.items.storage.storagetier$$lambda/0x0000022daeccb370@613b8633]",
+      "has_experience_housing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "appex:experience_storage_cell_4k"
+    ]
+  }
+}

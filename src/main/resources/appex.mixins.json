@@ -1,0 +1,11 @@
+{
+  "minVersion": "0.8.5",
+  "required": true,
+  "package": "es.degrassi.appexp.mixin",
+  "mixins": [
+    "ConfigInventoryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

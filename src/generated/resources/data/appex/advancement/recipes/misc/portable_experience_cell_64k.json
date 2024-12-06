@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_energy_cell": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ae2:energy_cell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_experience_cell_housing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "appex:experience_cell_housing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "appex:portable_experience_cell_64k"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_experience_cell_housing",
+      "has_energy_cell"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "appex:portable_experience_cell_64k"
+    ]
+  }
+}

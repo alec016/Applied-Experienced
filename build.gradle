@@ -126,6 +126,7 @@ dependencies {
   compileOnly "org.projectlombok:lombok:${project.lombok_version}"
   annotationProcessor "org.projectlombok:lombok:${project.lombok_version}"
   implementation "net.neoforged:neoforge:${neo_version}"
+  implementation "es.degrassi:experiencelib:${minecraft_version}-${experiencelib_version}"
 
   // ProbeJS
   localRuntime("curse.maven:probejs-585406:5820894")
@@ -152,6 +153,11 @@ dependencies {
 
   // Addons for testing
   implementation("appeng:appliedenergistics2:${ae2_version}")
+
+  // ExperienceFluids
+  localRuntime("curse.maven:mob-grinding-utils-254241:${project.MGU}")
+  localRuntime("curse.maven:titanium-287342:${titanium}")
+  localRuntime("curse.maven:industrial-foregoing-266515:${project.IF}")
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -169,6 +175,7 @@ tasks.withType(ProcessResources).configureEach {
       mod_description        : mod_description,
       mod_url                : mod_url,
       ae2_version            : ae2_version,
+      experiencelib_version  : experiencelib_version,
       icon                   : icon,
       pack_format_number     : pack_format_number
   ]
@@ -254,6 +261,7 @@ unifiedPublishing {
         gameVersions.addAll "Java 21"
         relations {
           depends "applied-energistics-2"
+          depends "experiencelib"
           optional "kubejs"
           optional "jei"
           optional "emi"
@@ -269,6 +277,7 @@ unifiedPublishing {
         id = "oPdlqv8D"
         relations {
           depends "applied-energistics-2"
+          depends "experiencelib"
           optional "kubejs"
           optional "jei"
           optional "emi"

@@ -6,6 +6,8 @@ import appeng.api.upgrades.UpgradeInventories;
 import appeng.core.localization.PlayerMessages;
 import appeng.items.AEBaseItem;
 import appeng.items.storage.StorageTier;
+import es.degrassi.appexp.me.cell.ExperienceCellHandler;
+import es.degrassi.appexp.api.item.IExperienceCellItem;
 import lombok.Getter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

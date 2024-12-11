@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_experience_acceptor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "appex:experience_acceptor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "appex:cable_experience_acceptor"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_experience_acceptor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "appex:cable_experience_acceptor"
+    ]
+  }
+}

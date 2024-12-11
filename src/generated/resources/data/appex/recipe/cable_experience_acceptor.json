@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "appex:experience_acceptor"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "appex:cable_experience_acceptor"
+  }
+}

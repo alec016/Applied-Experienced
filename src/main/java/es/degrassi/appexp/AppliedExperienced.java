@@ -5,28 +5,31 @@ import appeng.api.behaviors.GenericSlotCapacities;
 import appeng.api.features.P2PTunnelAttunement;
 import appeng.api.storage.StorageCells;
 import appeng.parts.automation.StackWorldBehaviors;
-import es.degrassi.appexp.ae2.ExperienceContainerItemStrategy;
-import es.degrassi.appexp.ae2.ExperienceKey;
-import es.degrassi.appexp.ae2.ExperienceKeyType;
-import es.degrassi.appexp.ae2.GenericStackExperienceStorage;
-import es.degrassi.appexp.ae2.stack.ExperienceExternalStorageStrategy;
-import es.degrassi.appexp.ae2.stack.ExperienceStackExportStrategy;
-import es.degrassi.appexp.ae2.stack.ExperienceStackImportStrategy;
-import es.degrassi.appexp.api.capability.AExpCapabilities;
-import es.degrassi.appexp.api.capability.BasicExperienceTank;
-import es.degrassi.appexp.api.capability.IExperienceHandler;
+import es.degrassi.appexp.block.entity.ExperienceAcceptorEntity;
+import es.degrassi.appexp.block.entity.ExperienceConverterEntity;
+import es.degrassi.appexp.definition.AExpBlockEntities;
+import es.degrassi.appexp.definition.AExpBlocks;
+import es.degrassi.appexp.definition.AExpConfig;
+import es.degrassi.appexp.definition.AExpItems;
+import es.degrassi.appexp.definition.AExpMenus;
+import es.degrassi.appexp.me.strategy.ExperienceContainerItemStrategy;
+import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.ExperienceKeyType;
+import es.degrassi.appexp.me.misc.GenericStackExperienceStorage;
+import es.degrassi.appexp.me.strategy.ExperienceExternalStorageStrategy;
+import es.degrassi.appexp.me.strategy.ExperienceStackExportStrategy;
+import es.degrassi.appexp.me.strategy.ExperienceStackImportStrategy;
 import es.degrassi.appexp.data.AppliedExperiencedDataGenerators;
-import es.degrassi.appexp.item.AEComponents;
-import es.degrassi.appexp.item.CreativeExperienceCellHandler;
-import es.degrassi.appexp.item.ExperienceCellHandler;
+import es.degrassi.appexp.definition.AExpComponents;
+import es.degrassi.appexp.me.cell.CreativeExperienceCellHandler;
+import es.degrassi.appexp.me.cell.ExperienceCellHandler;
+import es.degrassi.appexp.part.ExperienceAcceptorPart;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BottleItem;
-import net.minecraft.world.item.ExperienceBottleItem;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,10 +38,14 @@ public class AppliedExperienced {
   public static final String MODID = "appex";
   public static final Logger LOGGER = LogManager.getLogger("Applied Experienced");
 
-  public AppliedExperienced(final IEventBus bus) {
-    AEItems.initialize(bus);
-    AEComponents.initialize(bus);
-    AEMenus.initialize(bus);
+  public AppliedExperienced(final ModContainer CONTAINER, final IEventBus bus) {
+    CONTAINER.registerConfig(ModConfig.Type.COMMON, AExpConfig.getSpec());
+
+    AExpItems.initialize(bus);
+    AExpBlockEntities.DR.register(bus);
+    AExpBlocks.DR.register(bus);
+    AExpComponents.initialize(bus);
+    AExpMenus.initialize(bus);
 
     bus.addListener(AppliedExperiencedDataGenerators::onGatherData);
 
@@ -46,7 +53,7 @@ public class AppliedExperienced {
 
     StorageCells.addCellHandler(ExperienceCellHandler.INSTANCE);
     StorageCells.addCellHandler(CreativeExperienceCellHandler.INSTANCE);
-    bus.addListener(AEItems::initCellUpgrades);
+    bus.addListener(AExpItems::initCellUpgrades);
 
     StackWorldBehaviors.registerImportStrategy(ExperienceKeyType.TYPE, ExperienceStackImportStrategy::new);
     StackWorldBehaviors.registerExportStrategy(ExperienceKeyType.TYPE, ExperienceStackExportStrategy::new);
@@ -56,29 +63,17 @@ public class AppliedExperienced {
     GenericSlotCapacities.register(ExperienceKeyType.TYPE, ExperienceKey.MAX_EXPERIENCE);
 
     bus.addListener(GenericStackExperienceStorage::registerCapability);
-
-    bus.addListener(this::addCapabilities);
+    bus.addListener(ExperienceConverterEntity::registerCapability);
+    bus.addListener(ExperienceAcceptorEntity::registerCapability);
+    bus.addListener(ExperienceAcceptorPart::registerCapability);
 
     bus.addListener((FMLCommonSetupEvent event) -> {
       event.enqueueWork(this::initializeAttunement);
     });
   }
 
-  private void addCapabilities(final RegisterCapabilitiesEvent event) {
-    event.registerItem(AExpCapabilities.EXPERIENCE.item(), (x, y) -> {
-      if (x.getItem() instanceof ExperienceBottleItem) {
-        IExperienceHandler handler = new BasicExperienceTank(7, null);
-        handler.setExperience(7);
-        return handler;
-      } else if (x.getItem() instanceof BottleItem) {
-        return new BasicExperienceTank(7, null);
-      }
-      return null;
-    }, Items.EXPERIENCE_BOTTLE, Items.GLASS_BOTTLE);
-  }
-
   private void initializeAttunement() {
-    P2PTunnelAttunement.registerAttunementTag(AEItems.EXPERIENCE_P2P_TUNNEL.get());
+//    P2PTunnelAttunement.registerAttunementTag(AExpItems.EXPERIENCE_P2P_TUNNEL.get());
   }
 
   public static ResourceLocation id(String path) {

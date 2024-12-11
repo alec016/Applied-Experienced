@@ -38,3 +38,10 @@ type = "required"
 versionRange = "[${ae2_version},)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "experiencelib"
+type = "required"
+versionRange = "[${experiencelib_version},)"
+ordering = "AFTER"
+side = "BOTH"

@@ -2,7 +2,8 @@ package es.degrassi.appexp.data;
 
 import appeng.core.definitions.AEBlocks;
 import appeng.items.storage.StorageTier;
-import es.degrassi.appexp.AEItems;
+import es.degrassi.appexp.definition.AExpBlocks;
+import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.AppliedExperienced;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,7 +27,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
   @Override
   protected void buildRecipes(RecipeOutput output) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, es.degrassi.appexp.AEItems.EXPERIENCE_CELL_HOUSING::get)
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AExpItems.EXPERIENCE_CELL_HOUSING::get)
         .pattern("QRQ")
         .pattern("R R")
         .pattern("OOO")
@@ -36,9 +37,9 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         .unlockedBy("has_dusts/redstone", has(Tags.Items.DUSTS_REDSTONE))
         .save(output, AppliedExperienced.id("experience_cell_housing"));
 
-    var housing = AEItems.EXPERIENCE_CELL_HOUSING.get();
+    var housing = AExpItems.EXPERIENCE_CELL_HOUSING.get();
 
-    AEItems.getCells().forEach(cell -> {
+    AExpItems.getCells().forEach(cell -> {
       var tierName = cell.get().getTier().toString().toLowerCase(Locale.ROOT);
       ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, cell::get)
           .requires(housing)
@@ -48,7 +49,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
           .save(output);
     });
 
-    AEItems.getPortables().forEach(portable -> {
+    AExpItems.getPortables().forEach(portable -> {
       ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, portable::get)
           .requires(AEBlocks.ME_CHEST)
           .requires(cellComponent(portable.get().getTier()))
@@ -58,6 +59,15 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
           .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
           .save(output);
     });
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AExpItems.EXPERIENCE_ACCEPTOR_PART)
+        .requires(AExpBlocks.EXPERIENCE_ACCEPTOR)
+        .unlockedBy("has_experience_acceptor", has(AExpBlocks.EXPERIENCE_ACCEPTOR))
+        .save(output, AppliedExperienced.id("cable_experience_acceptor"));
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_ACCEPTOR)
+        .requires(AExpItems.EXPERIENCE_ACCEPTOR_PART)
+        .unlockedBy("has_experience_acceptor", has(AExpBlocks.EXPERIENCE_ACCEPTOR))
+        .save(output, AppliedExperienced.id("experience_acceptor_from_part"));
   }
 
   private static Item cellComponent(StorageTier tier) {

@@ -5,7 +5,9 @@ import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.upgrades.Upgrades;
 import appeng.items.storage.StorageTier;
 import appeng.items.tools.powered.AbstractPortableCell;
-import es.degrassi.appexp.AEMenus;
+import es.degrassi.appexp.definition.AExpMenus;
+import es.degrassi.appexp.me.cell.ExperienceCellHandler;
+import es.degrassi.appexp.api.item.IExperienceCellItem;
 import lombok.Getter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +25,7 @@ public class ExperiencePortableCellItem extends AbstractPortableCell implements 
   private final StorageTier tier;
 
   public ExperiencePortableCellItem(StorageTier tier, Properties props, int defaultColor) {
-    super(AEMenus.PORTABLE_EXPERIENCE_CELL_TYPE, props, defaultColor);
+    super(AExpMenus.PORTABLE_EXPERIENCE_CELL_TYPE, props, defaultColor);
     this.tier = tier;
   }
 

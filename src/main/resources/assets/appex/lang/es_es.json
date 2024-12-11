@@ -1,0 +1,26 @@
+{
+  "text.appex.experience": "Experiencia",
+  "text.appex.creative_tab": "Applied Experienced",
+  "appex.gui.element.experience.tooltip": "%s / %s",
+  "gui.appex.experience_converter": "Conversor de experiencia",
+
+  "item.appex.experience_cell_housing": "ME Carcasa de almacenamiento de Experiencia",
+
+  "item.appex.experience_storage_cell_1k": "1k ME Celda de almacenamiento de Experiencia",
+  "item.appex.experience_storage_cell_4k": "4k ME Celda de almacenamiento de Experiencia",
+  "item.appex.experience_storage_cell_16k": "16k ME Celda de almacenamiento de Experiencia",
+  "item.appex.experience_storage_cell_64k": "64k ME Celda de almacenamiento de Experiencia",
+  "item.appex.experience_storage_cell_256k": "256k ME Celda de almacenamiento de Experiencia",
+  "item.appex.creative_experience_cell": "Creative ME Celda de almacenamiento de Experiencia",
+
+  "item.appex.portable_experience_cell_16k": "16k Celda de Experiencia Portátil",
+  "item.appex.portable_experience_cell_1k": "1k Celda de Experiencia Portátil",
+  "item.appex.portable_experience_cell_4k": "4k Celda de Experiencia Portátil",
+  "item.appex.portable_experience_cell_64k": "64k Celda de Experiencia Portátil",
+  "item.appex.portable_experience_cell_256k": "256k Celda de Experiencia Portátil",
+
+  "item.appex.experience_p2p_tunnel": "Experiencia Tunel P2P",
+
+  "block.appex.experience_acceptor": "ME Conector de Experiencia",
+  "block.appex.experience_converter": "Conversor de experiencia"
+}

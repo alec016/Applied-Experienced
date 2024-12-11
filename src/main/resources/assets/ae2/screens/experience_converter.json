@@ -1,0 +1,56 @@
+{
+  "includes": ["common/common.json"],
+  "background": {
+    "texture": "guis/priority.png",
+    "srcRect": [0, 0, 176, 125]
+  },
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "gui.appex.experience_converter"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+  "widgets": {
+    "experience": {
+      "top": 32,
+      "left": 8
+    },
+    "insert_one": {
+      "top": 50,
+      "left": 9
+    },
+    "insert_ten": {
+      "top": 50,
+      "left": 27
+    },
+    "insert_hundred": {
+      "top": 50,
+      "left": 45
+    },
+    "insert_all": {
+      "top": 50,
+      "left": 63
+    },
+    "extract_one": {
+      "top": 50,
+      "left": 97
+    },
+    "extract_ten": {
+      "top": 50,
+      "left": 115
+    },
+    "extract_hundred": {
+      "top": 50,
+      "left": 133
+    },
+    "extract_all": {
+      "top": 50,
+      "left": 151
+    }
+  }
+}

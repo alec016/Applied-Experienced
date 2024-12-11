@@ -257,15 +257,11 @@ unifiedPublishing {
     if (CURSE_API_KEY != null) {
       curseforge {
         token = CURSE_API_KEY
-        id = "1083840"
+        id = "1157608"
         gameVersions.addAll "Java 21"
         relations {
           depends "applied-energistics-2"
           depends "experiencelib"
-          optional "kubejs"
-          optional "jei"
-          optional "emi"
-          optional "jade"
         }
       }
     }
@@ -274,14 +270,10 @@ unifiedPublishing {
     if (MODRINTH_API_KEY != null) {
       modrinth {
         token = MODRINTH_API_KEY
-        id = "oPdlqv8D"
+        id = "yKwUnZCV"
         relations {
           depends "applied-energistics-2"
           depends "experiencelib"
-          optional "kubejs"
-          optional "jei"
-          optional "emi"
-          optional "jade"
         }
       }
     }

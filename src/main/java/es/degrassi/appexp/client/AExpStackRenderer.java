@@ -3,22 +3,18 @@ package es.degrassi.appexp.client;
 import appeng.api.client.AEKeyRenderHandler;
 import appeng.client.gui.style.Blitter;
 import com.mojang.blaze3d.vertex.PoseStack;
-import es.degrassi.appexp.AppliedExperienced;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.Level;
 
-public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey> {
-  public static final Material EXPERIENCE = new Material(
-      InventoryMenu.BLOCK_ATLAS, AppliedExperienced.id("block/experience"));
+import static es.degrassi.experiencelib.util.ExperienceUtils.EXPERIENCE;
 
+public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey> {
   @Override
   public void drawInGui(Minecraft minecraft, GuiGraphics guiGraphics, int x, int y, ExperienceKey what) {
 

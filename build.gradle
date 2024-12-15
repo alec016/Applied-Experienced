@@ -272,7 +272,7 @@ unifiedPublishing {
         token = MODRINTH_API_KEY
         id = "yKwUnZCV"
         relations {
-          depends "applied-energistics-2"
+          depends "ae2"
           depends "experiencelib"
         }
       }

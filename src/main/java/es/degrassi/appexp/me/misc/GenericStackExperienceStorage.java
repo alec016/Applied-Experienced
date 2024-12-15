@@ -71,6 +71,11 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
   }
 
   @Override
+  public void setCapacity(long l) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public long receiveExperience(long experience, boolean simulate) {
     return insert(experience, Actionable.ofSimulate(simulate));
   }

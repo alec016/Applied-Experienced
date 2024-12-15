@@ -95,6 +95,11 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
     }
 
     @Override
+    public void setCapacity(long l) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public long getExperienceCapacity() {
       return getOutputStream()
           .map(part -> part.getOutputHandler().getLocalMaxExperience())
@@ -112,7 +117,7 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
       }
 
       if (!simulate) {
-        queueTunnelDrain(PowerUnit.AE, (double) stack / ExperienceKeyType.TYPE.getAmountPerOperation());
+        deductEnergyCost((double) stack / ExperienceKeyType.TYPE.getAmountPerOperation(), PowerUnit.AE);
       }
 
       var forEach = stack / outputs.size();
@@ -146,7 +151,7 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
       }
 
       if (!simulate) {
-        queueTunnelDrain(PowerUnit.AE, (double) amount / ExperienceKeyType.TYPE.getAmountPerOperation());
+        deductEnergyCost((double) amount / ExperienceKeyType.TYPE.getAmountPerOperation(), PowerUnit.AE);
       }
 
       var forEach = amount / outputs.size();
@@ -241,6 +246,11 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
     }
 
     @Override
+    public void setCapacity(long l) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public long getExperienceCapacity() {
       try (var input = getInputCapability()) {
         return input.get().getExperienceCapacity() + MAX_BUFFER;
@@ -266,7 +276,7 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
         var result = input.get().extractExperience(amount, simulate);
 
         if (!simulate) {
-          queueTunnelDrain(PowerUnit.AE, (double) result / ExperienceKeyType.TYPE.getAmountPerOperation());
+          deductEnergyCost((double) result / ExperienceKeyType.TYPE.getAmountPerOperation(), PowerUnit.AE);
         }
 
         return result;
@@ -286,7 +296,7 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
         var result = input.get().extractExperienceRecipe(amount, simulate);
 
         if (!simulate) {
-          queueTunnelDrain(PowerUnit.AE, (double) result / ExperienceKeyType.TYPE.getAmountPerOperation());
+          deductEnergyCost((double) result / ExperienceKeyType.TYPE.getAmountPerOperation(), PowerUnit.AE);
         }
 
         return result;
@@ -332,6 +342,11 @@ public class ExperienceP2PTunnelPart extends CapabilityP2PTunnelPart<ExperienceP
 
     @Override
     public void setExperience(long experience) {
+
+    }
+
+    @Override
+    public void setCapacity(long l) {
 
     }
 

@@ -118,7 +118,7 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   @Override
   protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
     super.loadAdditional(tag, registries);
-    experienceTank.deserializeNBT(registries, tag.get("experienceTank"));
+    experienceTank.deserializeNBT(registries, tag.getCompound("experienceTank"));
   }
 
   @Override

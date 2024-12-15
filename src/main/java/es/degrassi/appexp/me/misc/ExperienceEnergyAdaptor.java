@@ -47,6 +47,11 @@ public record ExperienceEnergyAdaptor(IExternalPowerSink sink, IActionHost host)
   }
 
   @Override
+  public void setCapacity(long l) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public long receiveExperience(long experience, boolean simulate) {
     sink.injectExternalPower(PowerUnit.AE, experience * AE_PER_EXPERIENCE, Actionable.ofSimulate(simulate));
     return Math.min(experience, getExperienceCapacity() - getExperience());

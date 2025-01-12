@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cell_componentstoragetier[index=4, nameprefix=64k, bytes=65536, idledrain=2.0, componentsupplier=appeng.items.storage.storagetier$$lambda/0x000001bee8da5780@1d0df574]": {
+    "has_cell_component_64k": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cell_componentstoragetier[index=4, nameprefix=64k, bytes=65536, idledrain=2.0, componentsupplier=appeng.items.storage.storagetier$$lambda/0x000001bee8da5780@1d0df574]",
+      "has_cell_component_64k",
       "has_experience_housing"
     ]
   ],

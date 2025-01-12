@@ -14,7 +14,6 @@ import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import appeng.items.storage.StorageTier;
 import es.degrassi.appexp.AppliedExperienced;
-import es.degrassi.appexp.item.CreativeExperienceCellItem;
 import es.degrassi.appexp.item.ExperiencePortableCellItem;
 import es.degrassi.appexp.item.ExperienceStorageCell;
 import es.degrassi.appexp.part.ExperienceAcceptorPart;
@@ -88,11 +87,6 @@ public final class AExpItems {
       AExpItems::basic
   );
 
-  public static final ItemDefinition<CreativeExperienceCellItem> EXPERIENCE_CELL_CREATIVE = item(
-      "Creative ME Experience Storage Cell",
-      "creative_experience_cell",
-      (p) -> new CreativeExperienceCellItem(p.stacksTo(1))
-  );
   public static final ItemDefinition<ExperienceStorageCell> EXPERIENCE_CELL_1K = cell(StorageTier.SIZE_1K);
   public static final ItemDefinition<ExperienceStorageCell> EXPERIENCE_CELL_4K = cell(StorageTier.SIZE_4K);
   public static final ItemDefinition<ExperienceStorageCell> EXPERIENCE_CELL_16K = cell(StorageTier.SIZE_16K);
@@ -131,7 +125,7 @@ public final class AExpItems {
     return item(
         tier.namePrefix() + " ME Experience Storage Cell",
         "experience_storage_cell_" + tier.namePrefix(),
-        p -> new ExperienceStorageCell(p.stacksTo(1), tier, EXPERIENCE_CELL_HOUSING.get())
+        p -> new ExperienceStorageCell(p.stacksTo(1), tier)
     );
   }
 

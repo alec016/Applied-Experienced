@@ -7,30 +7,11 @@ import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.AppliedExperienced;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
-
-  private static final ResourceLocation P2P_TUNNEL_BASE_ITEM = AppEng.makeId("item/p2p_tunnel_base");
-  private static final ResourceLocation P2P_TUNNEL_BASE_PART = AppEng.makeId("part/p2p/p2p_tunnel_base");
-  private static final ResourceLocation STORAGE_CELL_LED = AppEng.makeId("item/storage_cell_led");
-  private static final ResourceLocation PORTABLE_CELL_LED = AppEng.makeId("item/portable_cell_led");
-  private static final ResourceLocation PORTABLE_CELL_FIELD = AppEng.makeId("item/portable_cell_screen");
-  private static final ResourceLocation P2P_TUNNEL = AppliedExperienced.id("part/p2p_tunnel_experience");
-  private static final ResourceLocation ENERGY_ACCEPTOR = AppEng.makeId("part/energy_acceptor");
-  private static final ResourceLocation CABLE_ENERGY_ACCEPTOR = AppEng.makeId("item/cable_energy_acceptor");
-
   public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
     super(output, AppliedExperienced.MODID, existingFileHelper);
-
-    existingFileHelper.trackGenerated(P2P_TUNNEL_BASE_ITEM, MODEL);
-    existingFileHelper.trackGenerated(P2P_TUNNEL_BASE_PART, MODEL);
-    existingFileHelper.trackGenerated(ENERGY_ACCEPTOR, MODEL);
-    existingFileHelper.trackGenerated(CABLE_ENERGY_ACCEPTOR, MODEL);
-    existingFileHelper.trackGenerated(STORAGE_CELL_LED, TEXTURE);
-    existingFileHelper.trackGenerated(PORTABLE_CELL_LED, TEXTURE);
-    existingFileHelper.trackGenerated(PORTABLE_CELL_FIELD, TEXTURE);
   }
 
   @Override
@@ -40,22 +21,21 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     withExistingParent(housing.id().getPath(), mcLoc("item/generated"))
         .texture("layer0", AppliedExperienced.id("item/" + housing.id().getPath()));
 
-    cell(AExpItems.EXPERIENCE_CELL_CREATIVE, "item/" + AExpItems.EXPERIENCE_CELL_CREATIVE.id().getPath());
-    driveCell(AExpItems.EXPERIENCE_CELL_CREATIVE.id().getPath(), 10);
     AExpItems.getCells().forEach(cell -> {
       cell(cell, "item/" + cell.id().getPath());
       driveCell(cell.id().getPath(), offsetByTier(cell.get().getTier()));
     });
-    AExpItems.getPortables().forEach(cell -> portableCell(cell, "item/" + cell.id().getPath()));
+    AExpItems.getPortables().forEach(cell -> portableCell(cell, cell.get().getTier().namePrefix()));
 
-    withExistingParent("item/experience_p2p_tunnel", P2P_TUNNEL_BASE_ITEM)
-        .texture("type", P2P_TUNNEL);
-    withExistingParent("part/experience_p2p_tunnel", P2P_TUNNEL_BASE_PART)
-        .texture("type", P2P_TUNNEL);
+    var tunnel = AppliedExperienced.id("part/p2p_tunnel_experience");
+    withExistingParent("item/experience_p2p_tunnel", AppEng.makeId("item/p2p_tunnel_base"))
+        .texture("type", tunnel);
+    withExistingParent("part/experience_p2p_tunnel", AppEng.makeId("part/p2p/p2p_tunnel_base"))
+        .texture("type", tunnel);
 
-    withExistingParent("part/experience_acceptor", ENERGY_ACCEPTOR)
+    withExistingParent("part/experience_acceptor", AppEng.makeId("part/energy_acceptor"))
         .texture("front", "block/experience_acceptor");
-    withExistingParent("item/cable_experience_acceptor", CABLE_ENERGY_ACCEPTOR)
+    withExistingParent("item/cable_experience_acceptor", AppEng.makeId("item/cable_energy_acceptor"))
         .texture("front", "block/experience_acceptor");
   }
 
@@ -73,15 +53,15 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
   private void cell(ItemDefinition<?> cell, String background) {
     withExistingParent(cell.id().getPath(), mcLoc("item/generated"))
         .texture("layer0", AppliedExperienced.id(background))
-        .texture("layer1", STORAGE_CELL_LED);
+        .texture("layer1", AppEng.makeId("item/storage_cell_led"));
   }
 
-  private void portableCell(ItemDefinition<?> portable, String background) {
+  private void portableCell(ItemDefinition<?> portable, String tier) {
     withExistingParent(portable.id().getPath(), mcLoc("item/generated"))
         .texture("layer0", AppliedExperienced.id("item/portable_experience_cell_housing"))
-        .texture("layer1", PORTABLE_CELL_LED)
-        .texture("layer2", PORTABLE_CELL_FIELD)
-        .texture("layer3", AppliedExperienced.id(background));
+        .texture("layer1", AppEng.makeId("item/portable_cell_led"))
+        .texture("layer2", AppEng.makeId("item/portable_cell_screen"))
+        .texture("layer3", AppEng.makeId("item/portable_cell_side_" + tier));
   }
 
   private void driveCell(String cell, int offset) {

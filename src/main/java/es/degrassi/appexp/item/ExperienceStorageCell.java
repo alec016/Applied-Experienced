@@ -6,6 +6,7 @@ import appeng.api.upgrades.UpgradeInventories;
 import appeng.core.localization.PlayerMessages;
 import appeng.items.AEBaseItem;
 import appeng.items.storage.StorageTier;
+import appeng.recipes.game.StorageCellDisassemblyRecipe;
 import es.degrassi.appexp.me.cell.ExperienceCellHandler;
 import es.degrassi.appexp.api.item.IExperienceCellItem;
 import lombok.Getter;
@@ -18,7 +19,6 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,12 +29,10 @@ import java.util.Optional;
 @Getter
 public class ExperienceStorageCell extends AEBaseItem implements IExperienceCellItem {
   private final StorageTier tier;
-  private final ItemLike housing;
 
-  public ExperienceStorageCell(Properties properties, StorageTier tier, ItemLike housingItem) {
+  public ExperienceStorageCell(Properties properties, StorageTier tier) {
     super(properties);
     this.tier = tier;
-    this.housing = housingItem;
   }
 
   @Override
@@ -73,20 +71,23 @@ public class ExperienceStorageCell extends AEBaseItem implements IExperienceCell
     if (player != null && player.isShiftKeyDown()) {
       if (level.isClientSide()) return false;
 
+      var disassembledStacks = StorageCellDisassemblyRecipe.getDisassemblyResult(level, stack.getItem());
+      if (disassembledStacks.isEmpty()) return false;
+
       var playerInv = player.getInventory();
       var cellInv = StorageCells.getCellInventory(stack, null);
 
       if (cellInv != null && playerInv.getSelected() == stack) {
         if (cellInv.getAvailableStacks().isEmpty()) {
           playerInv.setItem(playerInv.selected, ItemStack.EMPTY);
-          playerInv.placeItemBackInInventory(
-              tier.componentSupplier().get().getDefaultInstance());
 
           for (var upgrade : getUpgrades(stack)) {
             playerInv.placeItemBackInInventory(upgrade);
           }
 
-          playerInv.placeItemBackInInventory(housing.asItem().getDefaultInstance());
+          for (var disassembled : disassembledStacks) {
+            playerInv.placeItemBackInInventory(disassembled);
+          }
 
           return true;
         } else {

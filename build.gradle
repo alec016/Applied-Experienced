@@ -12,6 +12,10 @@ tasks.named('wrapper', Wrapper).configure {
   distributionType = Wrapper.DistributionType.BIN
 }
 
+tasks.build {
+  finalizedBy(tasks.publishToMavenLocal)
+}
+
 base {
   archivesName = archives_base_name
   version = "${minecraft_version}-${mod_version}"

@@ -2,27 +2,26 @@ package es.degrassi.appexp;
 
 import appeng.api.behaviors.ContainerItemStrategy;
 import appeng.api.behaviors.GenericSlotCapacities;
-import appeng.api.features.P2PTunnelAttunement;
 import appeng.api.storage.StorageCells;
 import appeng.parts.automation.StackWorldBehaviors;
 import es.degrassi.appexp.block.entity.ExperienceAcceptorEntity;
 import es.degrassi.appexp.block.entity.ExperienceConverterEntity;
+import es.degrassi.appexp.data.AppliedExperiencedDataGenerators;
 import es.degrassi.appexp.definition.AExpBlockEntities;
 import es.degrassi.appexp.definition.AExpBlocks;
+import es.degrassi.appexp.definition.AExpComponents;
 import es.degrassi.appexp.definition.AExpConfig;
 import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.definition.AExpMenus;
-import es.degrassi.appexp.me.strategy.ExperienceContainerItemStrategy;
+import es.degrassi.appexp.me.cell.CreativeExperienceCellHandler;
+import es.degrassi.appexp.me.cell.ExperienceCellHandler;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.appexp.me.misc.GenericStackExperienceStorage;
+import es.degrassi.appexp.me.strategy.ExperienceContainerItemStrategy;
 import es.degrassi.appexp.me.strategy.ExperienceExternalStorageStrategy;
 import es.degrassi.appexp.me.strategy.ExperienceStackExportStrategy;
 import es.degrassi.appexp.me.strategy.ExperienceStackImportStrategy;
-import es.degrassi.appexp.data.AppliedExperiencedDataGenerators;
-import es.degrassi.appexp.definition.AExpComponents;
-import es.degrassi.appexp.me.cell.CreativeExperienceCellHandler;
-import es.degrassi.appexp.me.cell.ExperienceCellHandler;
 import es.degrassi.appexp.part.ExperienceAcceptorPart;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -42,8 +41,8 @@ public class AppliedExperienced {
     CONTAINER.registerConfig(ModConfig.Type.COMMON, AExpConfig.getSpec());
 
     AExpItems.initialize(bus);
-    AExpBlockEntities.DR.register(bus);
     AExpBlocks.DR.register(bus);
+    AExpBlockEntities.DR.register(bus);
     AExpComponents.initialize(bus);
     AExpMenus.initialize(bus);
 

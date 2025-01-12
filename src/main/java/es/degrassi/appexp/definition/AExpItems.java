@@ -131,7 +131,7 @@ public final class AExpItems {
     return item(
         tier.namePrefix() + " ME Experience Storage Cell",
         "experience_storage_cell_" + tier.namePrefix(),
-        p -> new ExperienceStorageCell(p.stacksTo(1), tier, EXPERIENCE_CELL_HOUSING.get())
+        p -> new ExperienceStorageCell(p.stacksTo(1), tier)
     );
   }
 

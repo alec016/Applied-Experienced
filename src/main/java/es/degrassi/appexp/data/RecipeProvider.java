@@ -2,6 +2,7 @@ package es.degrassi.appexp.data;
 
 import appeng.core.definitions.AEBlocks;
 import appeng.items.storage.StorageTier;
+import appeng.recipes.game.StorageCellDisassemblyRecipe;
 import es.degrassi.appexp.definition.AExpBlocks;
 import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.AppliedExperienced;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.Locale;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
@@ -40,24 +41,41 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     var housing = AExpItems.EXPERIENCE_CELL_HOUSING.get();
 
     AExpItems.getCells().forEach(cell -> {
-      var tierName = cell.get().getTier().toString().toLowerCase(Locale.ROOT);
+      var component = cellComponent(cell.get().getTier());
       ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, cell::get)
           .requires(housing)
-          .requires(cellComponent(cell.get().getTier()))
-          .unlockedBy("has_cell_component" + tierName, has(cell))
+          .requires(component)
+          .unlockedBy("has_cell_component_" + cell.get().getTier().namePrefix(), has(cell))
           .unlockedBy("has_experience_housing", has(housing))
           .save(output);
+      output.accept(
+          cell.id().withSuffix("_disassembly"),
+          new StorageCellDisassemblyRecipe(
+              cell.asItem(),
+              List.of(component.getDefaultInstance(), housing.getDefaultInstance())),
+          null);
     });
 
     AExpItems.getPortables().forEach(portable -> {
+      var component = cellComponent(portable.get().getTier());
       ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, portable::get)
           .requires(AEBlocks.ME_CHEST)
-          .requires(cellComponent(portable.get().getTier()))
+          .requires(component)
           .requires(AEBlocks.ENERGY_CELL)
           .requires(housing)
           .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(housing).getPath(), has(housing))
           .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
           .save(output);
+      output.accept(
+          portable.id().withSuffix("_disassembly"),
+          new StorageCellDisassemblyRecipe(
+              portable.asItem(),
+              List.of(
+                  component.getDefaultInstance(),
+                  housing.getDefaultInstance(),
+                  AEBlocks.ME_CHEST.stack(),
+                  AEBlocks.ENERGY_CELL.stack())),
+          null);
     });
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AExpItems.EXPERIENCE_ACCEPTOR_PART)

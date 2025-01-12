@@ -13,7 +13,6 @@ import es.degrassi.appexp.definition.AExpComponents;
 import es.degrassi.appexp.definition.AExpConfig;
 import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.definition.AExpMenus;
-import es.degrassi.appexp.me.cell.CreativeExperienceCellHandler;
 import es.degrassi.appexp.me.cell.ExperienceCellHandler;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
@@ -51,7 +50,6 @@ public class AppliedExperienced {
     bus.addListener(ExperienceKeyType::register);
 
     StorageCells.addCellHandler(ExperienceCellHandler.INSTANCE);
-    StorageCells.addCellHandler(CreativeExperienceCellHandler.INSTANCE);
     bus.addListener(AExpItems::initCellUpgrades);
 
     StackWorldBehaviors.registerImportStrategy(ExperienceKeyType.TYPE, ExperienceStackImportStrategy::new);

@@ -51,8 +51,6 @@ public class AppliedExperiencedClient {
       AExpItems.getPortables().forEach(cell ->
           StorageCellModels.registerModel(cell.get(), id(prefix + cell.id().getPath()))
       );
-      StorageCellModels.registerModel(
-          AExpItems.EXPERIENCE_CELL_CREATIVE, id(prefix + "creative_experience_cell"));
     });
   }
 

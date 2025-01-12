@@ -21,8 +21,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     withExistingParent(housing.id().getPath(), mcLoc("item/generated"))
         .texture("layer0", AppliedExperienced.id("item/" + housing.id().getPath()));
 
-    cell(AExpItems.EXPERIENCE_CELL_CREATIVE, "item/" + AExpItems.EXPERIENCE_CELL_CREATIVE.id().getPath());
-    driveCell(AExpItems.EXPERIENCE_CELL_CREATIVE.id().getPath(), 10);
     AExpItems.getCells().forEach(cell -> {
       cell(cell, "item/" + cell.id().getPath());
       driveCell(cell.id().getPath(), offsetByTier(cell.get().getTier()));

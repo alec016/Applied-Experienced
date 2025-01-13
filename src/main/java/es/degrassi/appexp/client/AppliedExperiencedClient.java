@@ -45,12 +45,12 @@ public class AppliedExperiencedClient {
   private void initializeModels(FMLClientSetupEvent event) {
     event.enqueueWork(() -> {
       var prefix = "block/drive/cells/";
-      AExpItems.getCells().forEach(cell ->
-          StorageCellModels.registerModel(cell.get(), id(prefix + cell.id().getPath()))
-      );
-      AExpItems.getPortables().forEach(cell ->
-          StorageCellModels.registerModel(cell.get(), id(prefix + cell.id().getPath()))
-      );
+
+      for (var i = 0; i < AExpItems.getCells().size(); i++) {
+        var cell = AExpItems.getCells().get(i);
+        StorageCellModels.registerModel(cell.get(), id(prefix + cell.id().getPath()));
+        StorageCellModels.registerModel(AExpItems.getPortables().get(i).get(), id(prefix + cell.id().getPath()));
+      }
     });
   }
 

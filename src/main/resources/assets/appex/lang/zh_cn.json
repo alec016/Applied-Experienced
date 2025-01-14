@@ -23,5 +23,7 @@
   "item.appex.experience_p2p_tunnel": "经验P2P通道",
 
   "block.appex.experience_acceptor": "ME经验接收器",
-  "block.appex.experience_converter": "经验转换器"
+  "block.appex.experience_converter": "经验转换器",
+
+  "item.appex.cable_experience_acceptor": "ME经验接收器"
 }

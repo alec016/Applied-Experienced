@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "tag": "c:glass_panes"
+    },
+    "d": {
+      "item": "ae2:cell_component_64k"
+    },
+    "e": {
+      "item": "minecraft:experience_bottle"
+    },
+    "p": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "ppp",
+    "ede",
+    "ccc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "appex:experience_converter"
+  }
+}

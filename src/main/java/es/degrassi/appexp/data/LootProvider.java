@@ -1,6 +1,5 @@
 package es.degrassi.appexp.data;
 
-import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.BlockDefinition;
 import es.degrassi.appexp.definition.AExpBlocks;
 import net.minecraft.core.HolderLookup;

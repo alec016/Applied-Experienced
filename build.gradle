@@ -229,7 +229,11 @@ publishing {
   repositories {
     maven {
       name = 'maven'
-      url = 'D:\\local_maven'
+      url = 'https://maven.degrassi.es/releases'
+      credentials {
+        username = "Alec_016GG"
+        password = System.getenv("MAVEN_PASSWORD")
+      }
     }
   }
 }

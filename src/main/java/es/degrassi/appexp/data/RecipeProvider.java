@@ -1,11 +1,12 @@
 package es.degrassi.appexp.data;
 
 import appeng.core.definitions.AEBlocks;
+import appeng.core.definitions.AEItems;
 import appeng.items.storage.StorageTier;
 import appeng.recipes.game.StorageCellDisassemblyRecipe;
+import es.degrassi.appexp.AppliedExperienced;
 import es.degrassi.appexp.definition.AExpBlocks;
 import es.degrassi.appexp.definition.AExpItems;
-import es.degrassi.appexp.AppliedExperienced;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -13,6 +14,8 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
@@ -77,6 +80,38 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                   AEBlocks.ENERGY_CELL.stack())),
           null);
     });
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_CONVERTER)
+        .pattern("ppp")
+        .pattern("ede")
+        .pattern("ccc")
+        .define('p', TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.withDefaultNamespace("planks")))
+        .define('d', AEItems.CELL_COMPONENT_64K)
+        .define('c', TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.parse("c:glass_panes")))
+        .define('e', Items.EXPERIENCE_BOTTLE)
+        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output, AppliedExperienced.id("experience_converter"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_ACCEPTOR)
+        .pattern("ede")
+        .pattern("dad")
+        .pattern("ede")
+        .define('a', AEBlocks.ENERGY_ACCEPTOR)
+        .define('d', AEItems.CELL_COMPONENT_1K)
+        .define('e', Items.EXPERIENCE_BOTTLE)
+        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output, AppliedExperienced.id("experience_acceptor_1"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_ACCEPTOR)
+        .pattern("ded")
+        .pattern("eae")
+        .pattern("ded")
+        .define('a', AEBlocks.ENERGY_ACCEPTOR)
+        .define('d', AEItems.CELL_COMPONENT_1K)
+        .define('e', Items.EXPERIENCE_BOTTLE)
+        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output, AppliedExperienced.id("experience_acceptor_2"));
+
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AExpItems.EXPERIENCE_ACCEPTOR_PART)
         .requires(AExpBlocks.EXPERIENCE_ACCEPTOR)

@@ -12,10 +12,6 @@ tasks.named('wrapper', Wrapper).configure {
   distributionType = Wrapper.DistributionType.BIN
 }
 
-tasks.build {
-  finalizedBy(tasks.publishToMavenLocal)
-}
-
 base {
   archivesName = archives_base_name
   version = "${minecraft_version}-${mod_version}"
@@ -78,7 +74,7 @@ repositories {
   }
   maven {
     name = "Lat's maven"
-    url = "https://maven.saps.dev/releases"
+    url = "https://maven.latvian.dev/releases"
     content {
       includeGroup "dev.latvian.mods"
       includeGroup "dev.latvian.apps"
@@ -96,7 +92,6 @@ repositories {
     content {
       includeGroup "mcjty.theoneprobe"
       includeGroup "mekanism"
-      includeGroup "appeng"
     }
   }
   maven {
@@ -141,7 +136,7 @@ dependencies {
 
   // EMI
   compileOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}:api")
-  compileOnly runtimeOnly("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}")
+  compileOnly localRuntime("dev.emi:emi-neoforge:${emi_version}+${minecraft_version}")
 
   // KubeJS
   compileOnly localRuntime("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
@@ -150,13 +145,14 @@ dependencies {
   compileOnly localRuntime("curse.maven:jade-324717:${jade_version}")
 
   // The one probe
-  localRuntime compileOnly("mcjty.theoneprobe:theoneprobe:${top_version}") {transitive = false}
+  compileOnly localRuntime("mcjty.theoneprobe:theoneprobe:${top_version}") {transitive = false}
 
   // Mekanism
   localRuntime("mekanism:Mekanism:${mekanism_version}")
 
   // Addons for testing
-  implementation("appeng:appliedenergistics2:${ae2_version}")
+  compileOnly localRuntime("org.appliedenergistics:appliedenergistics2:${ae2_version}")
+  compileOnly localRuntime("org.appliedenergistics:guideme:${guideme_version}")
 
   // ExperienceFluids
   localRuntime("curse.maven:mob-grinding-utils-254241:${project.MGU}")

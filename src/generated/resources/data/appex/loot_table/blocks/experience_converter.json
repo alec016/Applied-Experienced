@@ -14,6 +14,12 @@
           "name": "appex:experience_converter"
         }
       ],
+      "functions": [
+        {
+          "function": "minecraft:copy_components",
+          "source": "block_entity"
+        }
+      ],
       "rolls": 1.0
     }
   ],

@@ -31,7 +31,7 @@ public class ExperienceCellInventory implements StorageCell {
     this.stack = stack;
     this.container = container;
 
-    this.amount = stack.getOrDefault(AExpComponents.EXPERIENCE_CELL_AMOUNT, 0L);
+    this.amount = stack.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L);
   }
 
   public long getTotalBytes() {
@@ -124,9 +124,9 @@ public class ExperienceCellInventory implements StorageCell {
     }
 
     if (amount < 0) {
-      stack.remove(AExpComponents.EXPERIENCE_CELL_AMOUNT);
+      stack.remove(AExpComponents.EXPERIENCE_AMOUNT);
     } else {
-      stack.set(AExpComponents.EXPERIENCE_CELL_AMOUNT, amount);
+      stack.set(AExpComponents.EXPERIENCE_AMOUNT, amount);
     }
 
     isPersisted = true;

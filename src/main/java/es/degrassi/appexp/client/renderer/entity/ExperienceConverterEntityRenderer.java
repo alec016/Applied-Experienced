@@ -31,7 +31,7 @@ public class ExperienceConverterEntityRenderer implements BlockEntityRenderer<Ex
     var builder = new CubeBuilder();
     float y2 = Math.min(fill * 16, Math.max(fill * 16 - 1/2048f, 0));
     builder.setTexture(EXPERIENCE.sprite());
-    builder.addCube(1 + 1/2048f,  1/2048f, 1 +  + 1/2048f, 15 - 1/2048f, y2, 15 - 1/2048f);
+    builder.addCube(1 + 1/2048f,  1/2048f, 1 + 1/2048f, 15 - 1/2048f, y2, 15 - 1/2048f);
 
     for (var bakedQuad : builder.getOutput()) {
       vertexConsumer.putBulkData(poseStack.last(), bakedQuad, 1, 1, 1, 1, packedLight, packedOverlay);

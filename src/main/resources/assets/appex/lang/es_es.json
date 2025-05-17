@@ -1,6 +1,8 @@
 {
   "text.appex.experience": "Experiencia",
   "text.appex.creative_tab": "Applied Experienced",
+  "text.appex.experience_button.insert": "Insertar: %s %s",
+  "text.appex.experience_button.extract": "Extraer: %s %s",
   "appex.gui.element.experience.tooltip": "%s / %s",
   "gui.appex.experience_converter": "Conversor de experiencia",
 
@@ -21,5 +23,7 @@
   "item.appex.experience_p2p_tunnel": "Experiencia Tunel P2P",
 
   "block.appex.experience_acceptor": "ME Conector de Experiencia",
-  "block.appex.experience_converter": "Conversor de experiencia"
+  "block.appex.experience_converter": "Conversor de experiencia",
+
+  "appex.item.converter.tooltip": "Almacenado: %s XP"
 }

@@ -4,21 +4,22 @@ import appeng.blockentity.ClientTickingBlockEntity;
 import appeng.blockentity.ServerTickingBlockEntity;
 import appeng.menu.locator.MenuLocators;
 import es.degrassi.appexp.block.entity.ExperienceConverterEntity;
+import es.degrassi.appexp.definition.AExpComponents;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -34,8 +35,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
@@ -104,9 +105,23 @@ public class ExperienceConverterBlock extends Block implements EntityBlock {
     return makeShape();
   }
 
+  public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    if (level.getBlockEntity(pos) instanceof ExperienceConverterEntity entity) {
+      entity.getExperienceTank().setExperience(stack.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
+    }
+  }
+
+  @SuppressWarnings("deprecation")
+  public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+    ItemStack stack = new ItemStack(this);
+    if (level.getBlockEntity(pos) instanceof ExperienceConverterEntity entity) {
+      stack.set(AExpComponents.EXPERIENCE_AMOUNT, entity.getExperience());
+    }
+    return stack;
+  }
+
   @Override
   protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-
     BlockEntity te = level.getBlockEntity(pos);
     if (te instanceof ExperienceConverterEntity machine) {
       machine.openMenu(player, MenuLocators.forBlockEntity(te));
@@ -137,13 +152,5 @@ public class ExperienceConverterBlock extends Block implements EntityBlock {
       if (!l.isClientSide() && be instanceof ServerTickingBlockEntity tank) tank.serverTick();
       if (l.isClientSide() && be instanceof ClientTickingBlockEntity tank) tank.clientTick();
     };
-  }
-
-  public int getExpDrop(BlockState state, LevelAccessor level, BlockPos pos, @Nullable BlockEntity blockEntity,
-                        @Nullable Entity breaker, ItemStack tool) {
-    if (blockEntity instanceof ExperienceConverterEntity tank) {
-      return (int) tank.getExperience();
-    }
-    return super.getExpDrop(state, level, pos, blockEntity, breaker, tool);
   }
 }

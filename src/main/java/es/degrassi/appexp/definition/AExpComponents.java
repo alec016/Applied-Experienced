@@ -17,8 +17,12 @@ public final class AExpComponents {
   public static final DeferredRegister<DataComponentType<?>> DR =
       DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, AppliedExperienced.MODID);
 
-  public static final DataComponentType<Long> EXPERIENCE_CELL_AMOUNT = register(
+  public static final DataComponentType<Long> EXPERIENCE_AMOUNT = register(
       "experience_amount", builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG)
+  );
+
+  public static final DataComponentType<Long> EXPERIENCE_CAPACITY = register(
+      "experience_capacity", builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG)
   );
 
   private static <T> DataComponentType<T> register(String name, Consumer<DataComponentType.Builder<T>> customizer) {

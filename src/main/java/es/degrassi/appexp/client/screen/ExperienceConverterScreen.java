@@ -2,7 +2,6 @@ package es.degrassi.appexp.client.screen;
 
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.ScreenStyle;
-import appeng.client.guidebook.PageAnchor;
 import es.degrassi.appexp.client.container.ExperienceConverterContainer;
 import es.degrassi.appexp.client.widgets.ExperienceWidget;
 import es.degrassi.appexp.client.widgets.Icon;
@@ -14,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+import guideme.PageAnchor;
 
 import java.util.Locale;
 

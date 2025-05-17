@@ -7,19 +7,24 @@ import appeng.menu.MenuOpener;
 import appeng.menu.locator.MenuHostLocator;
 import es.degrassi.appexp.block.ExperienceConverterBlock;
 import es.degrassi.appexp.definition.AExpBlockEntities;
+import es.degrassi.appexp.definition.AExpBlocks;
+import es.degrassi.appexp.definition.AExpComponents;
 import es.degrassi.appexp.definition.AExpConfig;
 import es.degrassi.appexp.definition.AExpMenus;
 import es.degrassi.appexp.definition.AExpTags;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
+import es.degrassi.experiencelib.api.capability.IExperienceHandler;
 import es.degrassi.experiencelib.impl.capability.BasicExperienceTank;
 import lombok.Getter;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -29,6 +34,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -37,12 +43,17 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   private final BasicExperienceTank experienceTank = new BasicExperienceTank(
       AExpConfig.get().XP_CONVERTER_CAPACITY.get(),
       () -> {
-        setChanged();
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, level.registryAccess());
         BlockState state = getBlockState().setValue(ExperienceConverterBlock.light,
             Mth.lerpInt(Mth.clamp(((float) getExperience()) / getExperienceCapacity(), 0, 1), 0, 15));
         level.setBlockAndUpdate(getBlockPos(), state);
+        if (level.getBlockEntity(worldPosition) instanceof ExperienceConverterEntity entity)
+          entity.loadAdditional(tag, level.registryAccess());
+        setChanged();
       }
   );
+
   private final FluidTank fluidTank = new FluidTank(0, e -> e.is(AExpTags.Fluids.EXPERIENCE)) {
     @Override
     public int fill(FluidStack resource, FluidAction action) {
@@ -87,6 +98,15 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
         AExpBlockEntities.EXPERIENCE_CONVERTER.get(),
         (be, ctx) -> be.fluidTank
     );
+    event.registerItem(
+        ExperienceLibCapabilities.EXPERIENCE.item(),
+        (item, v) -> {
+          IExperienceHandler handler = new BasicExperienceTank(Long.MAX_VALUE, null);
+          handler.setExperience(Optional.ofNullable(item.get(AExpComponents.EXPERIENCE_AMOUNT)).orElse(0L));
+          return handler;
+        },
+        AExpBlocks.EXPERIENCE_CONVERTER.item().get()
+    );
   }
 
   public float getFillState() {
@@ -99,6 +119,21 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
 
   @Override
   public void serverTick() {
+  }
+
+  @Override
+  public void saveToItem(ItemStack stack, HolderLookup.Provider registries) {
+    super.saveToItem(stack, registries);
+    stack.set(AExpComponents.EXPERIENCE_AMOUNT, getExperience());
+  }
+
+  @Override
+  protected void collectImplicitComponents(DataComponentMap.Builder components) {
+    components.set(AExpComponents.EXPERIENCE_AMOUNT, getExperience());
+  }
+
+  protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
+    getExperienceTank().setExperience(componentInput.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
   }
 
   public long getExperience() {

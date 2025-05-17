@@ -6,10 +6,13 @@ import appeng.items.storage.BasicStorageCell;
 import appeng.items.tools.powered.PortableCellItem;
 import es.degrassi.appexp.AppliedExperienced;
 import es.degrassi.appexp.client.renderer.entity.ExperienceConverterEntityRenderer;
+import es.degrassi.appexp.client.renderer.item.ExperienceConverterItemRenderer;
 import es.degrassi.appexp.definition.AExpBlockEntities;
+import es.degrassi.appexp.definition.AExpBlocks;
 import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.util.FastColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +20,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.jetbrains.annotations.NotNull;
 
 import static es.degrassi.appexp.AppliedExperienced.id;
 
@@ -27,6 +33,7 @@ public class AppliedExperiencedClient {
     bus.addListener(this::registerItemColors);
     bus.addListener(this::initializeModels);
     bus.addListener(this::initBlockEntityRenderer);
+    bus.addListener(this::registerClientExtensions);
   }
 
   private void registerItemColors(RegisterColorHandlersEvent.Item event) {
@@ -56,5 +63,17 @@ public class AppliedExperiencedClient {
 
   private void initBlockEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
     event.registerBlockEntityRenderer(AExpBlockEntities.EXPERIENCE_CONVERTER.get(), ExperienceConverterEntityRenderer::new);
+  }
+
+  private void registerClientExtensions(RegisterClientExtensionsEvent event) {
+    event.registerItem(
+        new IClientItemExtensions() {
+          @Override
+          public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            return ExperienceConverterItemRenderer.RENDERER;
+          }
+        },
+        AExpBlocks.EXPERIENCE_CONVERTER.item().get()
+    );
   }
 }

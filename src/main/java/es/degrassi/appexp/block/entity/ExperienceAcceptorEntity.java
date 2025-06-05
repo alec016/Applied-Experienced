@@ -17,11 +17,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 public class ExperienceAcceptorEntity extends AENetworkedBlockEntity implements IExternalPowerSink {
-  private final ExperienceEnergyAdaptor adaptor = new ExperienceEnergyAdaptor(this, this);
+  private final ExperienceEnergyAdaptor adaptor;
 
   public ExperienceAcceptorEntity(BlockPos pos, BlockState state) {
     super(AExpBlockEntities.EXPERIENCE_ACCEPTOR.get(), pos, state);
     getMainNode().setIdlePowerUsage(0);
+    this.adaptor = new ExperienceEnergyAdaptor(this, this);
   }
 
   public static void registerCapability(final RegisterCapabilitiesEvent event) {

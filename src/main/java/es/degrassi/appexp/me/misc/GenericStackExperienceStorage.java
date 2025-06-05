@@ -6,7 +6,9 @@ import appeng.api.config.Actionable;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 public record GenericStackExperienceStorage(GenericInternalInventory inv) implements IExperienceHandler {
@@ -26,22 +28,27 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
   }
 
   @Override
-  public boolean canAcceptExperience(long experience) {
+  public int getTanks() {
+    return 1;
+  }
+
+  @Override
+  public boolean canAcceptExperience(int tank, long experience) {
     return insert(1, Actionable.SIMULATE) > 0;
   }
 
   @Override
-  public boolean canProvideExperience(long experience) {
+  public boolean canProvideExperience(int tank, long experience) {
     return extract(1, Actionable.SIMULATE) > 0;
   }
 
   @Override
-  public long getMaxExtract() {
+  public long getMaxExtract(int tank) {
     return Integer.MAX_VALUE;
   }
 
   @Override
-  public long getMaxReceive() {
+  public long getMaxReceive(int tank) {
     return Integer.MAX_VALUE;
   }
 
@@ -66,32 +73,32 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
   }
 
   @Override
-  public void setExperience(long experience) {
+  public void setExperience(int tank, long experience) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void setCapacity(long l) {
+  public void setCapacity(int tank, long l) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public long receiveExperience(long experience, boolean simulate) {
+  public long receiveExperience(int tank, long experience, boolean simulate) {
     return insert(experience, Actionable.ofSimulate(simulate));
   }
 
   @Override
-  public long extractExperience(long experience, boolean simulate) {
+  public long extractExperience(int tank, long experience, boolean simulate) {
     return extract(experience, Actionable.ofSimulate(simulate));
   }
 
   @Override
-  public long extractExperienceRecipe(long experience, boolean simulate) {
+  public long extractExperienceRecipe(int tank, long experience, boolean simulate) {
     return insert(experience, Actionable.ofSimulate(simulate));
   }
 
   @Override
-  public long receiveExperienceRecipe(long experience, boolean simulate) {
+  public long receiveExperienceRecipe(int tank, long experience, boolean simulate) {
     return extract(experience, Actionable.ofSimulate(simulate));
   }
 
@@ -113,5 +120,15 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
     }
 
     return extracted;
+  }
+
+  @Override
+  public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+    return new CompoundTag();
+  }
+
+  @Override
+  public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+
   }
 }

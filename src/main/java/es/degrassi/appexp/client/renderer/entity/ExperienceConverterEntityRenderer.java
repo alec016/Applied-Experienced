@@ -11,7 +11,7 @@ import net.minecraft.util.Mth;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static es.degrassi.experiencelib.util.ExperienceUtils.EXPERIENCE;
+import static es.degrassi.experiencelib.util.ClientExperienceUtils.EXPERIENCE;
 
 @ParametersAreNonnullByDefault
 public class ExperienceConverterEntityRenderer implements BlockEntityRenderer<ExperienceConverterEntity> {

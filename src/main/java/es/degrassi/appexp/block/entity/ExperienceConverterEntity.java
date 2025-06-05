@@ -14,7 +14,7 @@ import es.degrassi.appexp.definition.AExpMenus;
 import es.degrassi.appexp.definition.AExpTags;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
-import es.degrassi.experiencelib.impl.capability.BasicExperienceTank;
+import es.degrassi.experiencelib.impl.capability.BasicExperienceHandler;
 import lombok.Getter;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -40,7 +40,8 @@ import java.util.Optional;
 @MethodsReturnNonnullByDefault
 public class ExperienceConverterEntity extends BlockEntity implements ServerTickingBlockEntity, IActionHost {
   @Getter
-  private final BasicExperienceTank experienceTank = new BasicExperienceTank(
+  private final BasicExperienceHandler experienceTank = new BasicExperienceHandler(
+      1,
       AExpConfig.get().XP_CONVERTER_CAPACITY.get(),
       () -> {
         CompoundTag tag = new CompoundTag();
@@ -59,9 +60,9 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
     public int fill(FluidStack resource, FluidAction action) {
       if (resource.is(AExpTags.Fluids.EXPERIENCE)) {
         long toInsert = resource.getAmount() / AExpConfig.get().XP_CONVERSION_RATE.get();
-        long received = experienceTank.receiveExperience(toInsert, true);
+        long received = experienceTank.receiveExperience(0, toInsert, true);
         if (received >= toInsert) {
-          experienceTank.receiveExperience(received, action.simulate());
+          experienceTank.receiveExperience(0, received, action.simulate());
           return (int) received * AExpConfig.get().XP_CONVERSION_RATE.get();
         }
       }
@@ -72,9 +73,9 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
     public FluidStack drain(FluidStack resource, FluidAction action) {
       if (resource.is(AExpTags.Fluids.EXPERIENCE)) {
         long toExtract = resource.getAmount() / AExpConfig.get().XP_CONVERSION_RATE.get();
-        long extracted = experienceTank.extractExperience(toExtract, true);
+        long extracted = experienceTank.extractExperience(0, toExtract, true);
         if (extracted >= toExtract) {
-          experienceTank.extractExperience(extracted, action.simulate());
+          experienceTank.extractExperience(0, extracted, action.simulate());
           return resource.copyWithAmount((int) extracted * AExpConfig.get().XP_CONVERSION_RATE.get());
         }
       }
@@ -101,8 +102,8 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
     event.registerItem(
         ExperienceLibCapabilities.EXPERIENCE.item(),
         (item, v) -> {
-          IExperienceHandler handler = new BasicExperienceTank(Long.MAX_VALUE, null);
-          handler.setExperience(Optional.ofNullable(item.get(AExpComponents.EXPERIENCE_AMOUNT)).orElse(0L));
+          IExperienceHandler handler = new BasicExperienceHandler(1, Long.MAX_VALUE, null);
+          handler.setExperience(0, Optional.ofNullable(item.get(AExpComponents.EXPERIENCE_AMOUNT)).orElse(0L));
           return handler;
         },
         AExpBlocks.EXPERIENCE_CONVERTER.item().get()
@@ -133,7 +134,7 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   }
 
   protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
-    getExperienceTank().setExperience(componentInput.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
+    getExperienceTank().setExperience(0, componentInput.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
   }
 
   public long getExperience() {

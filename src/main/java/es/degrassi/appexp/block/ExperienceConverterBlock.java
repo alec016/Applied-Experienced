@@ -78,18 +78,18 @@ public class ExperienceConverterBlock extends Block implements EntityBlock {
     if (level.isClientSide) return ItemInteractionResult.sidedSuccess(true);
     if (level.getBlockEntity(pos) instanceof ExperienceConverterEntity entity) {
       if (stack.is(Items.GLASS_BOTTLE)) {
-        long extracted = entity.getExperienceTank().extractExperience(7, true);
+        long extracted = entity.getExperienceTank().extractExperience(0, 7, true);
         if (extracted == 7) {
-          entity.getExperienceTank().extractExperience(7, false);
+          entity.getExperienceTank().extractExperience(0, 7, false);
           stack.consume(1, player);
           player.getInventory().placeItemBackInInventory(new ItemStack(Items.EXPERIENCE_BOTTLE));
           return ItemInteractionResult.CONSUME;
         }
         return ItemInteractionResult.FAIL;
       } else if (stack.is(Items.EXPERIENCE_BOTTLE)) {
-        long inserted = entity.getExperienceTank().receiveExperience(7, true);
+        long inserted = entity.getExperienceTank().receiveExperience(0, 7, true);
         if (inserted == 7) {
-          entity.getExperienceTank().receiveExperience(7, false);
+          entity.getExperienceTank().receiveExperience(0, 7, false);
           stack.consume(1, player);
           player.getInventory().placeItemBackInInventory(new ItemStack(Items.GLASS_BOTTLE));
           return ItemInteractionResult.CONSUME;
@@ -107,7 +107,7 @@ public class ExperienceConverterBlock extends Block implements EntityBlock {
 
   public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     if (level.getBlockEntity(pos) instanceof ExperienceConverterEntity entity) {
-      entity.getExperienceTank().setExperience(stack.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
+      entity.getExperienceTank().setExperience(0, stack.getOrDefault(AExpComponents.EXPERIENCE_AMOUNT, 0L));
     }
   }
 

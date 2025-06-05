@@ -35,8 +35,12 @@ public class ExperienceExternalStorageStrategy implements ExternalStorageStrateg
       if (!(what instanceof ExperienceKey)) {
         return 0;
       }
-
-      var inserted = handler.receiveExperience(amount, mode.isSimulate());
+      long inserted = 0;
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (amount <= 0) break;
+        inserted += handler.receiveExperience(i, amount, mode.isSimulate());
+        amount -= inserted;
+      }
 
       if (inserted > 0 && mode == Actionable.MODULATE) {
         injectOrExtractCallback.run();
@@ -50,8 +54,12 @@ public class ExperienceExternalStorageStrategy implements ExternalStorageStrateg
       if (!(what instanceof ExperienceKey)) {
         return 0;
       }
-
-      var extracted = handler.extractExperience(amount, mode.isSimulate());
+      long extracted = 0;
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (amount <= 0) break;
+        extracted += handler.extractExperience(i, amount, mode.isSimulate());
+        amount -= extracted;
+      }
 
       if (extracted > 0 && mode == Actionable.MODULATE) {
         injectOrExtractCallback.run();

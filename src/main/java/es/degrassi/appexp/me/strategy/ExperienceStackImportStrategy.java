@@ -43,17 +43,23 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     var amount = inv.insert(ExperienceKey.KEY, rawAmount, Actionable.SIMULATE, context.getActionSource());
 
     if (amount > 0) {
-      handler.extractExperience((int) amount, false);
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (amount <= 0) break;
+        amount -= handler.receiveExperience(i, amount, false);
+      }
     }
 
     var inserted = inv.insert(ExperienceKey.KEY, amount, Actionable.MODULATE, context.getActionSource());
 
     if (inserted < amount) {
       var leftover = amount - inserted;
-      var backFill = (int) Math.min(leftover, handler.getExperienceCapacity() - handler.getExperience());
+      long backFill = Math.min(leftover, handler.getExperienceCapacity() - handler.getExperience());
 
       if (backFill > 0) {
-        handler.receiveExperience(backFill, false);
+        for (int i = 0; i < handler.getTanks(); i++) {
+          if (backFill <= 0) break;
+          backFill -= handler.receiveExperience(i, backFill, false);
+        }
       }
 
       if (leftover > backFill) {

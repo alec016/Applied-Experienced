@@ -34,7 +34,8 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
   private void changeExperience(long amount, ItemStack stack) {
     Preconditions.checkArgument(isExperienced(stack), "Stack must have Experience capability");
     if (isCreative(stack)) return;
-    stack.getCapability(ExperienceLibCapabilities.EXPERIENCE.item()).setExperience(Math.min(ExperienceKey.MAX_EXPERIENCE,
+    stack.getCapability(ExperienceLibCapabilities.EXPERIENCE.item()).setExperience(0,
+        Math.min(ExperienceKey.MAX_EXPERIENCE,
         Math.max(getExperience(stack) + amount, 0)));
   }
 

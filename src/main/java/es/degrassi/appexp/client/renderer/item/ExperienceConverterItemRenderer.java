@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static es.degrassi.experiencelib.util.ExperienceUtils.EXPERIENCE;
+import static es.degrassi.experiencelib.util.ClientExperienceUtils.EXPERIENCE;
 
 @ParametersAreNonnullByDefault
 public class ExperienceConverterItemRenderer extends BlockEntityWithoutLevelRenderer {

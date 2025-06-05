@@ -20,11 +20,12 @@ import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 public class ExperienceAcceptorPart extends AEBasePart implements IExternalPowerSink {
   @PartModels
   private static final IPartModel MODEL = new PartModel(AppliedExperienced.id("part/experience_acceptor"));
-  private final ExperienceEnergyAdaptor adaptor = new ExperienceEnergyAdaptor(this, this);
+  private final ExperienceEnergyAdaptor adaptor;
 
   public ExperienceAcceptorPart(IPartItem<?> partItem) {
     super(partItem);
     getMainNode().setIdlePowerUsage(0);
+    this.adaptor = new ExperienceEnergyAdaptor(this, this);
   }
 
   public static void registerCapability(RegisterPartCapabilitiesEvent event) {

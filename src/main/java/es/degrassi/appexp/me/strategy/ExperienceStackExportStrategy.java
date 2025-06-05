@@ -32,8 +32,14 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
     var handler = cache.getCapability();
 
     if (handler != null) {
-      var insertable = handler.receiveExperience(amount, true);
-      var extracted = (int) StorageHelper.poweredExtraction(
+      long insertable = 0;
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (amount <= 0) break;
+        var insert = handler.receiveExperience(i, amount, true);
+        insertable += insert;
+        amount -= insert;
+      }
+      var extracted = StorageHelper.poweredExtraction(
           context.getEnergySource(),
           context.getInternalStorage().getInventory(),
           ExperienceKey.KEY,
@@ -42,7 +48,11 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
           Actionable.MODULATE);
 
       if (extracted > 0) {
-        handler.receiveExperience(extracted, false);
+        for (int i = 0; i < handler.getTanks(); i++) {
+          if (extracted <= 0) break;
+          extracted -= handler.receiveExperience(i, extracted, false);
+        }
+
       }
 
       return extracted;
@@ -58,6 +68,17 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
     }
 
     var handler = cache.getCapability();
-    return handler != null ? handler.receiveExperience(amount, mode.isSimulate()) : 0;
+    if (handler != null) {
+      long inserted = 0;
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (amount <= 0) break;
+        long ins = handler.receiveExperience(i, amount, mode.isSimulate());
+        inserted += ins;
+        amount -= ins;
+      }
+
+      return inserted;
+    }
+    return 0;
   }
 }

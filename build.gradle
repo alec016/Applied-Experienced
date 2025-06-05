@@ -118,6 +118,13 @@ repositories {
       includeGroup "dev.emi"
     }
   }
+  maven {
+    name = "Alec Repository"
+    url = 'https://maven.degrassi.es/releases'
+    content {
+      includeGroup "es.degrassi"
+    }
+  }
 }
 
 dependencies {

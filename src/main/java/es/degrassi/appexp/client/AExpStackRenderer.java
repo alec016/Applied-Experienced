@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
-import static es.degrassi.experiencelib.util.ExperienceUtils.EXPERIENCE;
+import static es.degrassi.experiencelib.util.ClientExperienceUtils.EXPERIENCE;
 
 public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey> {
   @Override

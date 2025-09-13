@@ -27,5 +27,5 @@
 
   "item.appex.cable_experience_acceptor": "ME经验接收器",
 
-  "appex.item.converter.tooltip": ""
+  "appex.item.converter.tooltip": "已存储：%s XP"
 }

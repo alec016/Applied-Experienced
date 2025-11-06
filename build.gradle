@@ -68,8 +68,6 @@ repositories {
     url = "https://maven.blamejared.com/"
     content {
       includeGroup "mezz.jei"
-//      includeGroup "com.hollingsworth.ars_nouveau"
-//      includeGroup "vazkii.patchouli"
     }
   }
   maven {

@@ -1,8 +1,11 @@
 {
-  "includes": ["common/common.json"],
-  "background": {
-    "texture": "guis/priority.png",
-    "srcRect": [0, 0, 176, 125]
+  "includes": [
+    "common/common.json",
+    "common/player_inventory.json"
+  ],
+  "background":  {
+    "texture": "guis/experience_converter.png",
+    "srcRect": [0, 0, 176, 200]
   },
   "text": {
     "dialog_title": {
@@ -15,41 +18,51 @@
       }
     }
   },
+  "slots": {
+    "APEX_IN_SLOT": {
+      "top": 28,
+      "left": 45
+    },
+    "APEX_OUT_SLOT": {
+      "top": 28,
+      "left": 115
+    }
+  },
   "widgets": {
     "experience": {
-      "top": 32,
+      "top": 50,
       "left": 8
     },
     "insert_one": {
-      "top": 50,
+      "top": 68,
       "left": 9
     },
     "insert_ten": {
-      "top": 50,
+      "top": 68,
       "left": 27
     },
     "insert_hundred": {
-      "top": 50,
+      "top": 68,
       "left": 45
     },
     "insert_all": {
-      "top": 50,
+      "top": 68,
       "left": 63
     },
     "extract_one": {
-      "top": 50,
+      "top": 68,
       "left": 97
     },
     "extract_ten": {
-      "top": 50,
+      "top": 68,
       "left": 115
     },
     "extract_hundred": {
-      "top": 50,
+      "top": 68,
       "left": 133
     },
     "extract_all": {
-      "top": 50,
+      "top": 68,
       "left": 151
     }
   }

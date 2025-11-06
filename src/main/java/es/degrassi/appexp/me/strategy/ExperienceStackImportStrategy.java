@@ -3,6 +3,7 @@ package es.degrassi.appexp.me.strategy;
 import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
+import appeng.api.storage.StorageHelper;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
@@ -40,34 +41,32 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     var inv = context.getInternalStorage().getInventory();
 
     // Check how much source we can actually insert
-    var amount = inv.insert(ExperienceKey.KEY, rawAmount, Actionable.SIMULATE, context.getActionSource());
-
+    long amount = inv.insert(ExperienceKey.KEY, rawAmount, Actionable.SIMULATE, context.getActionSource());
+    long extractable = 0;
     if (amount > 0) {
       for (int i = 0; i < handler.getTanks(); i++) {
         if (amount <= 0) break;
-        amount -= handler.receiveExperience(i, amount, false);
+        var extract = handler.extractExperience(i, amount, true);
+        extractable += extract;
+        amount -= extract;
+      }
+    }
+    var inserted = StorageHelper.poweredInsert(
+        context.getEnergySource(),
+        context.getInternalStorage().getInventory(),
+        ExperienceKey.KEY,
+        extractable,
+        context.getActionSource(),
+        Actionable.MODULATE);
+
+    if (inserted > 0) {
+      for (int i = 0; i < handler.getTanks(); i++) {
+        if (inserted <= 0) break;
+        inserted -= handler.extractExperience(i, inserted, false);
       }
     }
 
-    var inserted = inv.insert(ExperienceKey.KEY, amount, Actionable.MODULATE, context.getActionSource());
-
-    if (inserted < amount) {
-      var leftover = amount - inserted;
-      long backFill = Math.min(leftover, handler.getExperienceCapacity() - handler.getExperience());
-
-      if (backFill > 0) {
-        for (int i = 0; i < handler.getTanks(); i++) {
-          if (backFill <= 0) break;
-          backFill -= handler.receiveExperience(i, backFill, false);
-        }
-      }
-
-      if (leftover > backFill) {
-        LOGGER.error("Storage import issue, voided {} source.", leftover - backFill);
-      }
-    }
-
-    var opsUsed = Math.max(1, inserted / ExperienceKeyType.TYPE.getAmountPerOperation());
+    var opsUsed = Math.max(1, extractable / ExperienceKeyType.TYPE.getAmountPerOperation());
     context.reduceOperationsRemaining(opsUsed);
 
     return amount > 0;

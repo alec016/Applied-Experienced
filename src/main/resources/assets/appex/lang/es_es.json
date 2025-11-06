@@ -25,5 +25,7 @@
   "block.appex.experience_acceptor": "ME Conector de Experiencia",
   "block.appex.experience_converter": "Conversor de experiencia",
 
-  "appex.item.converter.tooltip": "Almacenado: %s XP"
+  "appex.item.converter.tooltip": "Almacenado: %s XP",
+  "appex.item.converter.inv.in": "Almacenado %s",
+  "appex.item.converter.inv.out": "Almacenado %s"
 }

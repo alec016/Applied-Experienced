@@ -25,9 +25,7 @@
   "block.appex.experience_acceptor": "ME经验接收器",
   "block.appex.experience_converter": "经验转换器",
 
-  "appex.item.converter.tooltip": "已存储：%s XP"
-
-  "appex.item.converter.tooltip": "Stored: %s XP",
+  "appex.item.converter.tooltip": "已存储：%s XP",
   "appex.item.converter.inv.in": "Stored %s",
   "appex.item.converter.inv.out": "Stored %s"
 }

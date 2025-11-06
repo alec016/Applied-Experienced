@@ -23,5 +23,9 @@
   "item.appex.cable_experience_acceptor": "P2P туннель опыта",
 
   "block.appex.experience_acceptor": "МЭ приёмщик опыта",
-  "block.appex.experience_converter": "Преобразователь опыта"
+  "block.appex.experience_converter": "Преобразователь опыта",
+
+  "appex.item.converter.tooltip": "Stored: %s XP",
+  "appex.item.converter.inv.in": "Stored %s",
+  "appex.item.converter.inv.out": "Stored %s"
 }

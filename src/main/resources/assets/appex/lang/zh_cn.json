@@ -27,5 +27,7 @@
 
   "item.appex.cable_experience_acceptor": "ME经验接收器",
 
-  "appex.item.converter.tooltip": ""
+  "appex.item.converter.tooltip": "Stored: %s XP",
+  "appex.item.converter.inv.in": "Stored %s",
+  "appex.item.converter.inv.out": "Stored %s"
 }

@@ -5,6 +5,7 @@ import es.degrassi.appexp.AppliedExperienced;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -20,6 +21,13 @@ public final class AExpComponents {
   public static final DataComponentType<Long> EXPERIENCE_AMOUNT = register(
       "experience_amount", builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG)
   );
+  public static final DataComponentType<ItemContainerContents> IN_INV = register("in_inv",
+      builder -> builder.persistent(ItemContainerContents.CODEC)
+          .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  public static final DataComponentType<ItemContainerContents> OUT_INV = register("out_inv",
+      builder -> builder.persistent(ItemContainerContents.CODEC)
+          .networkSynchronized(ItemContainerContents.STREAM_CODEC));
 
   public static final DataComponentType<Long> EXPERIENCE_CAPACITY = register(
       "experience_capacity", builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG)

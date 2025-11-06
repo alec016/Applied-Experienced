@@ -9,7 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 
 public record ExperienceEnergyAdaptor(IExternalPowerSink sink, IActionHost host) implements IExperienceHandler {
-  private static final double AE_PER_EXPERIENCE = 16;
+  private static final double AE_PER_EXPERIENCE = 32;
 
   @Override
   public int getTanks() {

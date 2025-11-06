@@ -25,5 +25,7 @@
   "block.appex.experience_acceptor": "ME経験値アクセプター",
   "block.appex.experience_converter": "経験値変換機",
 
-  "item.appex.cable_experience_acceptor": "ME経験値アクセプター"
+  "appex.item.converter.tooltip": "Stored: %s XP",
+  "appex.item.converter.inv.in": "Stored %s",
+  "appex.item.converter.inv.out": "Stored %s"
 }

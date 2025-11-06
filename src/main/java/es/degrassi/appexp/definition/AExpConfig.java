@@ -19,6 +19,7 @@ public class AExpConfig {
 
   public final ConfigValue<Long> XP_CONVERTER_CAPACITY;
   public final ConfigValue<Integer> XP_CONVERSION_RATE;
+  public final ConfigValue<Integer> XP_BOTTLE_XP_AMOUNT;
 
   public AExpConfig(Builder builder) {
     builder.push("Experience Converter");
@@ -28,6 +29,9 @@ public class AExpConfig {
     this.XP_CONVERSION_RATE = builder
         .comment("Defines the amount(mB) necesary per XP point")
         .defineInRange("rate", 250, 1, Integer.MAX_VALUE, Integer.class);
+    this.XP_BOTTLE_XP_AMOUNT = builder
+        .comment("Defined the amount of xp given per Bottle o'Enchanting")
+        .defineInRange("amount", 1, 1, Integer.MAX_VALUE);
     builder.pop();
   }
 

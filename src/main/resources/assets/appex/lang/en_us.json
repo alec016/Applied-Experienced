@@ -25,5 +25,7 @@
   "block.appex.experience_acceptor": "ME Experience Acceptor",
   "block.appex.experience_converter": "Experience Converter",
 
-  "appex.item.converter.tooltip": "Stored: %s XP"
+  "appex.item.converter.tooltip": "Stored: %s XP",
+  "appex.item.converter.inv.in": "Stored %s",
+  "appex.item.converter.inv.out": "Stored %s"
 }

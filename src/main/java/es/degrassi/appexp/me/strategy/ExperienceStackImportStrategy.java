@@ -3,6 +3,7 @@ package es.degrassi.appexp.me.strategy;
 import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
+import appeng.api.storage.StorageHelper;
 import es.degrassi.appexp.me.key.ExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
@@ -45,11 +46,16 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     if (amount > 0) {
       for (int i = 0; i < handler.getTanks(); i++) {
         if (amount <= 0) break;
-        amount -= handler.receiveExperience(i, amount, false);
+        amount -= handler.extractExperience(i, amount, false);
       }
     }
-
-    var inserted = inv.insert(ExperienceKey.KEY, amount, Actionable.MODULATE, context.getActionSource());
+    var inserted = StorageHelper.poweredInsert(
+        context.getEnergySource(),
+        context.getInternalStorage().getInventory(),
+        ExperienceKey.KEY,
+        amount,
+        context.getActionSource(),
+        Actionable.MODULATE);
 
     if (inserted < amount) {
       var leftover = amount - inserted;
@@ -58,7 +64,7 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
       if (backFill > 0) {
         for (int i = 0; i < handler.getTanks(); i++) {
           if (backFill <= 0) break;
-          backFill -= handler.receiveExperience(i, backFill, false);
+          backFill -= handler.extractExperience(i, backFill, false);
         }
       }
 

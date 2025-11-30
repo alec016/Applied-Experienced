@@ -23,6 +23,7 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
   public ExperienceStackImportStrategy(ServerLevel level, BlockPos fromPos, Direction fromSide) {
     this.cache = BlockCapabilityCache.create(ExperienceLibCapabilities.EXPERIENCE.block(), level, fromPos, fromSide);
   }
+
   @Override
   public boolean transfer(StackTransferContext context) {
     if (!context.isKeyTypeEnabled(ExperienceKeyType.TYPE)) {
@@ -53,7 +54,7 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     }
     var inserted = StorageHelper.poweredInsert(
         context.getEnergySource(),
-        context.getInternalStorage().getInventory(),
+        inv,
         ExperienceKey.KEY,
         extractable,
         context.getActionSource(),

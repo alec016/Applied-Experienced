@@ -31,34 +31,35 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
 
     var handler = cache.getCapability();
 
-    if (handler != null) {
-      long insertable = 0;
+    if (handler == null) return 0;
+
+    var inv = context.getInternalStorage().getInventory();
+    long rawAmount = Math.min(amount, handler.getExperienceCapacity() - handler.getExperience());
+
+    long insertable = 0;
+    for (int i = 0; i < handler.getTanks(); i++) {
+      if (rawAmount <= 0) break;
+      var insert = handler.receiveExperience(i, rawAmount, true);
+      insertable += insert;
+      rawAmount -= insert;
+    }
+    var extracted = StorageHelper.poweredExtraction(
+        context.getEnergySource(),
+        inv,
+        ExperienceKey.KEY,
+        insertable,
+        context.getActionSource(),
+        Actionable.MODULATE);
+
+    if (extracted > 0) {
       for (int i = 0; i < handler.getTanks(); i++) {
-        if (amount <= 0) break;
-        var insert = handler.receiveExperience(i, amount, true);
-        insertable += insert;
-        amount -= insert;
-      }
-      var extracted = StorageHelper.poweredExtraction(
-          context.getEnergySource(),
-          context.getInternalStorage().getInventory(),
-          ExperienceKey.KEY,
-          insertable,
-          context.getActionSource(),
-          Actionable.MODULATE);
-
-      if (extracted > 0) {
-        for (int i = 0; i < handler.getTanks(); i++) {
-          if (extracted <= 0) break;
-          extracted -= handler.receiveExperience(i, extracted, false);
-        }
-
+        if (extracted <= 0) break;
+        extracted -= handler.receiveExperience(i, extracted, false);
       }
 
-      return extracted;
     }
 
-    return 0;
+    return extracted;
   }
 
   @Override

@@ -3,7 +3,7 @@ package es.degrassi.appexp.me.misc;
 import appeng.api.AECapabilities;
 import appeng.api.behaviors.GenericInternalInventory;
 import appeng.api.config.Actionable;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
 import net.minecraft.core.HolderLookup;
@@ -64,12 +64,12 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
     for (var i = 0; i < inv.size(); i++) {
       var key = inv.getKey(i);
 
-      if (key == null || key == ExperienceKey.KEY) {
+      if (key == null || key == AEExperienceKey.KEY) {
         slots += 1;
       }
     }
 
-    return slots * inv.getMaxAmount(ExperienceKey.KEY);
+    return slots * inv.getMaxAmount(AEExperienceKey.KEY);
   }
 
   @Override
@@ -106,7 +106,7 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
     var inserted = 0L;
 
     for (var i = 0; i < inv.size() && inserted < amount; ++i) {
-      inserted += inv.insert(i, ExperienceKey.KEY, amount - inserted, mode);
+      inserted += inv.insert(i, AEExperienceKey.KEY, amount - inserted, mode);
     }
 
     return inserted;
@@ -116,7 +116,7 @@ public record GenericStackExperienceStorage(GenericInternalInventory inv) implem
     var extracted = 0L;
 
     for (var i = 0; i < inv.size() && extracted < amount; ++i) {
-      extracted += inv.extract(i, ExperienceKey.KEY, amount - extracted, mode);
+      extracted += inv.extract(i, AEExperienceKey.KEY, amount - extracted, mode);
     }
 
     return extracted;

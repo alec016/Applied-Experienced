@@ -7,7 +7,7 @@ import appeng.api.stacks.AEKey;
 import appeng.api.stacks.KeyCounter;
 import appeng.api.storage.MEStorage;
 import appeng.core.localization.GuiText;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
@@ -32,7 +32,7 @@ public class ExperienceExternalStorageStrategy implements ExternalStorageStrateg
   private record Adaptor(IExperienceHandler handler, Runnable injectOrExtractCallback) implements MEStorage {
     @Override
     public long insert(AEKey what, long amount, Actionable mode, IActionSource source) {
-      if (!(what instanceof ExperienceKey)) {
+      if (!(what instanceof AEExperienceKey)) {
         return 0;
       }
       long inserted = 0;
@@ -51,7 +51,7 @@ public class ExperienceExternalStorageStrategy implements ExternalStorageStrateg
 
     @Override
     public long extract(AEKey what, long amount, Actionable mode, IActionSource source) {
-      if (!(what instanceof ExperienceKey)) {
+      if (!(what instanceof AEExperienceKey)) {
         return 0;
       }
       long extracted = 0;
@@ -73,7 +73,7 @@ public class ExperienceExternalStorageStrategy implements ExternalStorageStrateg
       var currentExperience = handler.getExperience();
 
       if (currentExperience != 0) {
-        out.add(ExperienceKey.KEY, currentExperience);
+        out.add(AEExperienceKey.KEY, currentExperience);
       }
     }
 

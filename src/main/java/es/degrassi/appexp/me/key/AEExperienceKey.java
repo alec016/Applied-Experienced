@@ -3,6 +3,8 @@ package es.degrassi.appexp.me.key;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import es.degrassi.appexp.AppliedExperienced;
+import es.degrassi.experiencelib.api.xei.ExperienceKey;
+import es.degrassi.experiencelib.api.xei.ExperienceStack;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -16,13 +18,14 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 @Getter
-public class ExperienceKey extends AEKey {
-  public static final ExperienceKey KEY = new ExperienceKey();
+public class AEExperienceKey extends AEKey {
+  public static final AEExperienceKey KEY = new AEExperienceKey();
   public static final long MAX_EXPERIENCE = 10_000;
 
   private static final ResourceLocation ID = AppliedExperienced.id("experience");
+  private static final ExperienceKey PK = ExperienceStack.EMPTY.getKey();
 
-  private ExperienceKey() {}
+  private AEExperienceKey() {}
 
   @Override
   public AEKeyType getType() {
@@ -41,7 +44,7 @@ public class ExperienceKey extends AEKey {
 
   @Override
   public Object getPrimaryKey() {
-    return this;
+    return PK;
   }
 
   @Override
@@ -61,6 +64,10 @@ public class ExperienceKey extends AEKey {
   @Override
   public void addDrops(long amount, List<ItemStack> drops, Level level, BlockPos pos) {
 
+  }
+
+  public ExperienceStack getStack() {
+    return ExperienceStack.EMPTY.copyWithAmount(1);
   }
 
   @Override

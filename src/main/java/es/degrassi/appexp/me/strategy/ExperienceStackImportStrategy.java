@@ -4,7 +4,7 @@ import appeng.api.behaviors.StackImportStrategy;
 import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
 import appeng.api.storage.StorageHelper;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
@@ -42,7 +42,7 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     var inv = context.getInternalStorage().getInventory();
 
     // Check how much source we can actually insert
-    long amount = inv.insert(ExperienceKey.KEY, rawAmount, Actionable.SIMULATE, context.getActionSource());
+    long amount = inv.insert(AEExperienceKey.KEY, rawAmount, Actionable.SIMULATE, context.getActionSource());
     long extractable = 0;
     if (amount > 0) {
       for (int i = 0; i < handler.getTanks(); i++) {
@@ -55,7 +55,7 @@ public class ExperienceStackImportStrategy implements StackImportStrategy {
     var inserted = StorageHelper.poweredInsert(
         context.getEnergySource(),
         inv,
-        ExperienceKey.KEY,
+        AEExperienceKey.KEY,
         extractable,
         context.getActionSource(),
         Actionable.MODULATE);

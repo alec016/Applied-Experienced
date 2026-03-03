@@ -10,7 +10,7 @@ import es.degrassi.appexp.client.renderer.item.ExperienceConverterItemRenderer;
 import es.degrassi.appexp.definition.AExpBlockEntities;
 import es.degrassi.appexp.definition.AExpBlocks;
 import es.degrassi.appexp.definition.AExpItems;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.util.FastColor;
@@ -29,7 +29,7 @@ import static es.degrassi.appexp.AppliedExperienced.id;
 @Mod(value = AppliedExperienced.MODID, dist = Dist.CLIENT)
 public class AppliedExperiencedClient {
   public AppliedExperiencedClient(final IEventBus bus) {
-    AEKeyRendering.register(ExperienceKeyType.TYPE, ExperienceKey.class, new AExpStackRenderer());
+    AEKeyRendering.register(ExperienceKeyType.TYPE, AEExperienceKey.class, new AExpStackRenderer());
     bus.addListener(this::registerItemColors);
     bus.addListener(this::initializeModels);
     bus.addListener(this::initBlockEntityRenderer);

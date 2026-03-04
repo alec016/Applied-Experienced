@@ -14,7 +14,7 @@ import es.degrassi.appexp.definition.AExpConfig;
 import es.degrassi.appexp.definition.AExpItems;
 import es.degrassi.appexp.definition.AExpMenus;
 import es.degrassi.appexp.me.cell.ExperienceCellHandler;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.appexp.me.misc.GenericStackExperienceStorage;
 import es.degrassi.appexp.me.strategy.ExperienceContainerItemStrategy;
@@ -56,8 +56,8 @@ public class AppliedExperienced {
     StackWorldBehaviors.registerExportStrategy(ExperienceKeyType.TYPE, ExperienceStackExportStrategy::new);
     StackWorldBehaviors.registerExternalStorageStrategy(ExperienceKeyType.TYPE, ExperienceExternalStorageStrategy::new);
 
-    ContainerItemStrategy.register(ExperienceKeyType.TYPE, ExperienceKey.class, new ExperienceContainerItemStrategy());
-    GenericSlotCapacities.register(ExperienceKeyType.TYPE, ExperienceKey.MAX_EXPERIENCE);
+    ContainerItemStrategy.register(ExperienceKeyType.TYPE, AEExperienceKey.class, new ExperienceContainerItemStrategy());
+    GenericSlotCapacities.register(ExperienceKeyType.TYPE, AEExperienceKey.MAX_EXPERIENCE);
 
     bus.addListener(GenericStackExperienceStorage::registerCapability);
     bus.addListener(ExperienceConverterEntity::registerCapability);

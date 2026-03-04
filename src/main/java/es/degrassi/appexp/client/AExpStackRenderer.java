@@ -3,7 +3,7 @@ package es.degrassi.appexp.client;
 import appeng.api.client.AEKeyRenderHandler;
 import appeng.client.gui.style.Blitter;
 import com.mojang.blaze3d.vertex.PoseStack;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,9 +14,9 @@ import net.minecraft.world.level.Level;
 
 import static es.degrassi.experiencelib.util.ClientExperienceUtils.EXPERIENCE;
 
-public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey> {
+public final class AExpStackRenderer implements AEKeyRenderHandler<AEExperienceKey> {
   @Override
-  public void drawInGui(Minecraft minecraft, GuiGraphics guiGraphics, int x, int y, ExperienceKey what) {
+  public void drawInGui(Minecraft minecraft, GuiGraphics guiGraphics, int x, int y, AEExperienceKey what) {
 
     Blitter.sprite(EXPERIENCE.sprite())
         .blending(false)
@@ -25,7 +25,7 @@ public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey
   }
 
   @Override
-  public void drawOnBlockFace(PoseStack poseStack, MultiBufferSource buffers, ExperienceKey what, float scale, int combinedLight, Level level) {
+  public void drawOnBlockFace(PoseStack poseStack, MultiBufferSource buffers, AEExperienceKey what, float scale, int combinedLight, Level level) {
     var sprite = EXPERIENCE.sprite();
     var color = 0xffffff;
 
@@ -74,7 +74,7 @@ public final class AExpStackRenderer implements AEKeyRenderHandler<ExperienceKey
   }
 
   @Override
-  public Component getDisplayName(ExperienceKey stack) {
+  public Component getDisplayName(AEExperienceKey stack) {
     return stack.getDisplayName();
   }
 }

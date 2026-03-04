@@ -4,7 +4,7 @@ import appeng.api.behaviors.ContainerItemStrategy;
 import appeng.api.config.Actionable;
 import appeng.api.stacks.GenericStack;
 import com.google.common.base.Preconditions;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
 
-public class ExperienceContainerItemStrategy implements ContainerItemStrategy<ExperienceKey, ExperienceContainerItemStrategy.Context> {
+public class ExperienceContainerItemStrategy implements ContainerItemStrategy<AEExperienceKey, ExperienceContainerItemStrategy.Context> {
   private long getExperience(ItemStack stack) {
     Preconditions.checkArgument(isExperienced(stack), "Stack must have Experience capability");
     return stack.getCapability(ExperienceLibCapabilities.EXPERIENCE.item()).getExperience();
@@ -35,7 +35,7 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
     Preconditions.checkArgument(isExperienced(stack), "Stack must have Experience capability");
     if (isCreative(stack)) return;
     stack.getCapability(ExperienceLibCapabilities.EXPERIENCE.item()).setExperience(0,
-        Math.min(ExperienceKey.MAX_EXPERIENCE,
+        Math.min(AEExperienceKey.MAX_EXPERIENCE,
         Math.max(getExperience(stack) + amount, 0)));
   }
 
@@ -48,7 +48,7 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
     var handler = stack.getCapability(ExperienceLibCapabilities.EXPERIENCE.item());
 
     if (handler != null) {
-      return new GenericStack(ExperienceKey.KEY, handler.getExperience());
+      return new GenericStack(AEExperienceKey.KEY, handler.getExperience());
     }
 
     return null;
@@ -77,7 +77,7 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
   }
 
   @Override
-  public long extract(Context context, ExperienceKey what, long amount, Actionable mode) {
+  public long extract(Context context, AEExperienceKey what, long amount, Actionable mode) {
     var stackCopy = context.getStack().copy();
     stackCopy.setCount(1);
     var extracted = stackCopy.is(Items.EXPERIENCE_BOTTLE) ? getExperience(stackCopy) : Math.min(amount, getExperience(stackCopy));
@@ -93,10 +93,10 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
   }
 
   @Override
-  public long insert(Context context, ExperienceKey what, long amount, Actionable mode) {
+  public long insert(Context context, AEExperienceKey what, long amount, Actionable mode) {
     var stackCopy = context.getStack().copy();
     stackCopy.setCount(1);
-    var inserted = stackCopy.is(Items.GLASS_BOTTLE) ? getCapacity(stackCopy) : Math.min(amount, ExperienceKey.MAX_EXPERIENCE - getExperience(stackCopy));
+    var inserted = stackCopy.is(Items.GLASS_BOTTLE) ? getCapacity(stackCopy) : Math.min(amount, AEExperienceKey.MAX_EXPERIENCE - getExperience(stackCopy));
     if (inserted > 0 && mode == Actionable.MODULATE) {
       if (stackCopy.is(Items.GLASS_BOTTLE)) {
         stackCopy = new ItemStack(Items.EXPERIENCE_BOTTLE);
@@ -110,11 +110,11 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
   }
 
   @Override
-  public void playFillSound(Player player, ExperienceKey what) {
+  public void playFillSound(Player player, AEExperienceKey what) {
   }
 
   @Override
-  public void playEmptySound(Player player, ExperienceKey what) {
+  public void playEmptySound(Player player, AEExperienceKey what) {
   }
 
   @Override

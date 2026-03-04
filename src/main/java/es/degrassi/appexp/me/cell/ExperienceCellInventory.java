@@ -10,7 +10,7 @@ import appeng.api.storage.cells.StorageCell;
 import appeng.api.upgrades.IUpgradeInventory;
 import appeng.core.definitions.AEItems;
 import es.degrassi.appexp.api.item.IExperienceCellItem;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.appexp.me.key.ExperienceKeyType;
 import es.degrassi.appexp.definition.AExpComponents;
 import net.minecraft.network.chat.Component;
@@ -86,7 +86,7 @@ public class ExperienceCellInventory implements StorageCell {
 
   @Override
   public long insert(AEKey what, long amount, Actionable mode, IActionSource source) {
-    if (amount == 0 || !(what instanceof ExperienceKey)) {
+    if (amount == 0 || !(what instanceof AEExperienceKey)) {
       return 0;
     }
 
@@ -105,7 +105,7 @@ public class ExperienceCellInventory implements StorageCell {
     var extractAmount = Math.min(Integer.MAX_VALUE, amount);
     var currentAmount = this.amount;
 
-    if (this.amount > 0 && Objects.equals(ExperienceKey.KEY, what)) {
+    if (this.amount > 0 && Objects.equals(AEExperienceKey.KEY, what)) {
       if (mode == Actionable.MODULATE) {
         this.amount = Math.max(0, this.amount - extractAmount);
         saveChanges();
@@ -135,7 +135,7 @@ public class ExperienceCellInventory implements StorageCell {
   @Override
   public void getAvailableStacks(KeyCounter out) {
     if (amount > 0) {
-      out.add(ExperienceKey.KEY, amount);
+      out.add(AEExperienceKey.KEY, amount);
     }
   }
 

@@ -5,7 +5,7 @@ import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
 import appeng.api.stacks.AEKey;
 import appeng.api.storage.StorageHelper;
-import es.degrassi.appexp.me.key.ExperienceKey;
+import es.degrassi.appexp.me.key.AEExperienceKey;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
 
   @Override
   public long transfer(StackTransferContext context, AEKey what, long amount) {
-    if (!(what instanceof ExperienceKey)) {
+    if (!(what instanceof AEExperienceKey)) {
       return 0;
     }
 
@@ -46,7 +46,7 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
     var extracted = StorageHelper.poweredExtraction(
         context.getEnergySource(),
         inv,
-        ExperienceKey.KEY,
+        AEExperienceKey.KEY,
         insertable,
         context.getActionSource(),
         Actionable.MODULATE);
@@ -64,7 +64,7 @@ public class ExperienceStackExportStrategy implements StackExportStrategy {
 
   @Override
   public long push(AEKey what, long amount, Actionable mode) {
-    if (!(what instanceof ExperienceKey)) {
+    if (!(what instanceof AEExperienceKey)) {
       return 0;
     }
 

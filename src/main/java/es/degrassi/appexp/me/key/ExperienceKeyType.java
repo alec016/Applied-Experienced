@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ExperienceKeyType extends AEKeyType {
   public static final AEKeyType TYPE = new ExperienceKeyType();
-  private static final MapCodec<ExperienceKey> MAP_CODEC = MapCodec.unit(ExperienceKey.KEY);
+  private static final MapCodec<AEExperienceKey> MAP_CODEC = MapCodec.unit(AEExperienceKey.KEY);
 
   public static void register(RegisterEvent event) {
     if (event.getRegistryKey().equals(Registries.ITEM)) {
@@ -22,7 +22,7 @@ public class ExperienceKeyType extends AEKeyType {
   }
 
   private ExperienceKeyType() {
-    super(AppliedExperienced.id("experience"), ExperienceKey.class, AExpText.EXPERIENCE.formatted());
+    super(AppliedExperienced.id("experience"), AEExperienceKey.class, AExpText.EXPERIENCE.formatted());
   }
 
   public MapCodec<? extends AEKey> codec() {
@@ -39,7 +39,7 @@ public class ExperienceKeyType extends AEKeyType {
 
   @Override
   public @Nullable AEKey readFromPacket(RegistryFriendlyByteBuf input) {
-    return ExperienceKey.KEY;
+    return AEExperienceKey.KEY;
   }
 
   @Override

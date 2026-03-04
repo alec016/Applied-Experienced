@@ -7,7 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@EventBusSubscriber(modid = AppliedExperienced.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = AppliedExperienced.MODID)
 public class PacketManager {
   @SubscribeEvent
   public static void register(final RegisterPayloadHandlersEvent event) {

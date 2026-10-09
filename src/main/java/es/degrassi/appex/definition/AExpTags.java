@@ -16,7 +16,6 @@ import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public abstract class AExpTags {
   private static final Set<Tag<?>> tags = new HashSet<>();
@@ -30,15 +29,27 @@ public abstract class AExpTags {
   }
 
   private static TagKey<Block> blockTag(String name, boolean isNeoForge) {
-    return BlockTags.create(rl(name, isNeoForge));
+    return blockTag(rl(name, isNeoForge));
+  }
+
+  private static TagKey<Block> blockTag(Identifier id) {
+    return BlockTags.create(id);
   }
 
   private static TagKey<Fluid> fluidTag(String name, boolean isNeoForge) {
-    return FluidTags.create(rl(name, isNeoForge));
+    return fluidTag(rl(name, isNeoForge));
+  }
+
+  private static TagKey<Fluid> fluidTag(Identifier id) {
+    return FluidTags.create(id);
   }
 
   private static TagKey<Item> itemTag(String name, boolean isNeoForge) {
-    return ItemTags.create(rl(name, isNeoForge));
+    return itemTag(rl(name, isNeoForge));
+  }
+
+  private static TagKey<Item> itemTag(Identifier id) {
+    return ItemTags.create(id);
   }
 
   private static class Tag<T> {
@@ -80,8 +91,13 @@ public abstract class AExpTags {
   }
 
   public static final class Items extends Tag<Item> {
+    public static final TagKey<Item> CURIO = new Items(Identifier.parse("curios:curio")).get();
     public Items(String name) {
       this(true, name, null);
+    }
+
+    public Items(Identifier id) {
+      super(itemTag(id), null, true);
     }
 
     public Items(boolean isNeoForge, String name, String englishName) {

@@ -1,6 +1,9 @@
 package es.degrassi.appex.data.tags;
 
+import appeng.core.definitions.ItemDefinition;
 import es.degrassi.appex.AppliedExperienced;
+import es.degrassi.appex.definition.AExpItems;
+import es.degrassi.appex.definition.AExpTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +18,7 @@ public class ItemTagsProvider extends BlockTagCopyingItemTagProvider {
   }
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-
+    tag(AExpTags.Items.CURIO)
+        .addAll(AExpItems.getPortables().stream().map(ItemDefinition::get));
   }
 }

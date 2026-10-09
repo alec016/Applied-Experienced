@@ -1,0 +1,9 @@
+{
+  "values": [
+    "appex:portable_experience_cell_1k",
+    "appex:portable_experience_cell_4k",
+    "appex:portable_experience_cell_16k",
+    "appex:portable_experience_cell_64k",
+    "appex:portable_experience_cell_256k"
+  ]
+}

@@ -119,10 +119,6 @@ repositories {
     url = "https://modmaven.dev/"
   }
   maven {
-    name = "TerraformersMC"
-    url = "https://maven.terraformersmc.com/"
-  }
-  maven {
     name "latvian" // KubeJS
     url "https://maven.latvian.dev/releases"
   }

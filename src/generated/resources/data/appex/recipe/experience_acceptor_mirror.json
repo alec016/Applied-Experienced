@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "ae2:energy_acceptor",
+    "d": "ae2:cell_component_1k",
+    "e": "minecraft:experience_bottle"
+  },
+  "pattern": [
+    "ded",
+    "eae",
+    "ded"
+  ],
+  "result": {
+    "id": "appex:experience_acceptor"
+  }
+}

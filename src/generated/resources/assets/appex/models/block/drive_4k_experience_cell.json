@@ -1,0 +1,7 @@
+{
+  "parent": "ae2:block/drive_4k_item_cell",
+  "textures": {
+    "cell": "appex:block/drive/drive_cells",
+    "particle": "ae2:block/drive/drive_cells"
+  }
+}

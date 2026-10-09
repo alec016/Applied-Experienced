@@ -1,0 +1,100 @@
+{
+  "includes": [
+    "common/palette.json"
+  ],
+  "background":  {
+    "texture": "appex:textures/guis/experience_converter.png",
+    "srcRect": [0, 0, 195, 200]
+  },
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "text.appex.gui.title.experience_converter"
+      },
+      "position": {
+        "left": 28,
+        "top": 6
+      }
+    },
+    "player_inventory_title": {
+      "text": {
+        "translate": "container.inventory"
+      },
+      "position": {
+        "left": 28,
+        "bottom": 95
+      }
+    }
+  },
+  "slots": {
+    "PLAYER_INVENTORY": {
+      "left": 27,
+      "bottom": 84,
+      "grid": "BREAK_AFTER_9COLS"
+    },
+    "PLAYER_HOTBAR": {
+      "left": 27,
+      "bottom": 26,
+      "grid": "HORIZONTAL"
+    },
+    "APEX_IN_SLOT": {
+      "top": 28,
+      "left": 64
+    },
+    "APEX_OUT_SLOT": {
+      "top": 28,
+      "left": 134
+    }
+  },
+  "widgets": {
+    "verticalToolbar": {
+      "left": 3,
+      "top": 28
+    },
+    "upgrades": {
+      "$comment": "The upgrade panel found on some screens",
+      "right": 2,
+      "top": 0
+    },
+    "invert_xp_action": {
+      "top": 2,
+      "left": 3
+    },
+    "experience": {
+      "top": 50,
+      "left": 28
+    },
+    "insert_one": {
+      "top": 68,
+      "left": 29
+    },
+    "insert_ten": {
+      "top": 68,
+      "left": 47
+    },
+    "insert_hundred": {
+      "top": 68,
+      "left": 65
+    },
+    "insert_all": {
+      "top": 68,
+      "left": 83
+    },
+    "extract_one": {
+      "top": 68,
+      "left": 117
+    },
+    "extract_ten": {
+      "top": 68,
+      "left": 135
+    },
+    "extract_hundred": {
+      "top": 68,
+      "left": 153
+    },
+    "extract_all": {
+      "top": 68,
+      "left": 171
+    }
+  }
+}

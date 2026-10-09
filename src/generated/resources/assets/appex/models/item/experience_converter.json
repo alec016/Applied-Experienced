@@ -1,0 +1,6 @@
+{
+  "parent": "appex:block/experience_converter",
+  "textures": {
+    "particle": "appex:block/experience_converter"
+  }
+}

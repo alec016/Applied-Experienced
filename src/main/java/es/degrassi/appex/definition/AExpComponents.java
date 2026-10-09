@@ -1,0 +1,37 @@
+package es.degrassi.appex.definition;
+
+import es.degrassi.appex.AppliedExperienced;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Consumer;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class AExpComponents {
+  public static final DeferredRegister<DataComponentType<?>> DR =
+      DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, AppliedExperienced.MODID);
+  public static final DataComponentType<ItemContainerContents> IN_INV = register("in_inv",
+      builder -> builder.persistent(ItemContainerContents.CODEC)
+          .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  public static final DataComponentType<ItemContainerContents> OUT_INV = register("out_inv",
+      builder -> builder.persistent(ItemContainerContents.CODEC)
+          .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  private static <T> DataComponentType<T> register(String name, Consumer<DataComponentType.Builder<T>> customizer) {
+    var builder = DataComponentType.<T>builder();
+    customizer.accept(builder);
+    var componentType = builder.build();
+    DR.register(name, () -> componentType);
+    return componentType;
+  }
+
+  public static void initialize(IEventBus bus) {
+    DR.register(bus);
+  }
+}

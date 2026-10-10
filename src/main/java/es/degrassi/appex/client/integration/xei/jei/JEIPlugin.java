@@ -42,6 +42,8 @@ public class JEIPlugin implements IModPlugin {
         subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
     subtypeRegistry.registerSubtypeInterpreter(AExpItems.PORTABLE_EXPERIENCE_CELL_256K.asItem(),
         subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+    subtypeRegistry.registerSubtypeInterpreter(AExpItems.EXPERIENCE_TERMINAL.asItem(),
+        subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
     subtypeRegistry.registerSubtypeInterpreter(AExpBlocks.EXPERIENCE_CONVERTER.asItem(),
         subTypeInterpreterForIngredientList(ExperienceLibRegistration.EXPERIENCE_COMPONENT.get()));
   }

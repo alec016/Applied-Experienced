@@ -11,6 +11,7 @@ import appeng.items.AEBaseItem;
 import appeng.items.materials.MaterialItem;
 import appeng.items.storage.StorageTier;
 import es.degrassi.appex.AppliedExperienced;
+import es.degrassi.appex.api.item.ICreativeTabItem;
 import es.degrassi.appex.item.ExperiencePortableCellItem;
 import es.degrassi.appex.item.ExperienceStorageCell;
 import lombok.AccessLevel;
@@ -68,12 +69,11 @@ public final class AExpItems {
     for (var def : defs) {
       var item = def.asItem();
 
-      if (item instanceof AEBaseBlockItem baseItem && baseItem.getBlock() instanceof AEBaseBlock baseBlock) {
-        baseBlock.addToMainCreativeTab(params, output);
-      } else if (item instanceof AEBaseItem baseItem) {
-        baseItem.addToMainCreativeTab(params, output);
-      } else {
-        output.accept(def);
+      switch (item) {
+        case AEBaseBlockItem baseItem when baseItem.getBlock() instanceof AEBaseBlock baseBlock -> baseBlock.addToMainCreativeTab(params, output);
+        case AEBaseItem baseItem -> baseItem.addToMainCreativeTab(params, output);
+        case ICreativeTabItem tabItem -> tabItem.addToMainCreativeTab(params, output);
+        default -> output.accept(def);
       }
     }
   }

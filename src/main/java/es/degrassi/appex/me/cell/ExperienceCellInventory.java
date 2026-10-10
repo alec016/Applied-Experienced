@@ -90,7 +90,7 @@ public class ExperienceCellInventory implements StorageCell {
       return 0;
     }
 
-    var inserted = Math.clamp(getMaxAmount() - this.amount, 0, amount);
+    var inserted = Math.clamp(amount, 0, getMaxAmount() - this.amount);
 
     if (mode == Actionable.MODULATE) {
       this.amount += inserted;

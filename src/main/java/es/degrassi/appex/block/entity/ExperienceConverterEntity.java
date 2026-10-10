@@ -70,6 +70,7 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   private boolean setChangedQueued = false;
   @Getter
   private boolean isInverted = false;
+  private boolean initialized = false;
   @Getter
   protected final List<ISyncable<?, ?>> stuffToSync = new ArrayList<>();
   private final AppEngInternalInventory inventoryIn;
@@ -144,11 +145,15 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   @Override
   public void onLoad() {
     super.onLoad();
+    init();
+  }
+
+  private void init() {
+    if (initialized) return;
     getStuffToSync().clear();
     experienceTank.getStuffToSync(stuffToSync::add);
     getStuffToSync(stuffToSync::add);
-    broadcastChanges();
-    saveChanges();
+    initialized = true;
   }
 
   @Override
@@ -158,6 +163,7 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
 
   @Override
   public void serverTick() {
+    if (!initialized) init();
     if (inventoryIn.isEmpty()) return;
     if (inventoryOut.getRedstoneSignal() == 15) return;
     AtomicBoolean doneSomething = new AtomicBoolean(false);
@@ -288,8 +294,6 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
     this.isInverted = input.getBooleanOr("inverted", false);
     inventoryIn.setFilter(isInverted ? ApexItemFilters.INSERT_ONLY_GLASS : ApexItemFilters.INSERT_ONLY_XP);
     inventoryOut.setFilter(isInverted ? ApexItemFilters.EXTRACT_ONLY_XP : ApexItemFilters.EXTRACT_ONLY_GLASS);
-    broadcastChanges();
-    saveChanges();
   }
 
   @Override

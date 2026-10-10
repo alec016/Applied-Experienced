@@ -1,0 +1,19 @@
+{
+  "values": [
+    "appex:experience_cell_housing",
+    "appex:experience_storage_cell_1k",
+    "appex:experience_storage_cell_4k",
+    "appex:experience_storage_cell_16k",
+    "appex:experience_storage_cell_64k",
+    "appex:experience_storage_cell_256k",
+    "appex:portable_experience_cell_1k",
+    "appex:portable_experience_cell_4k",
+    "appex:portable_experience_cell_16k",
+    "appex:portable_experience_cell_64k",
+    "appex:portable_experience_cell_256k",
+    "appex:cable_experience_acceptor",
+    "appex:experience_p2p_tunnel",
+    "appex:experience_converter",
+    "appex:experience_acceptor"
+  ]
+}

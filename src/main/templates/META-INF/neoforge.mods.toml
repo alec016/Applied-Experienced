@@ -30,3 +30,24 @@ type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="experiencelib"
+type="required"
+versionRange="[${experiencelib_version},)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="ae2"
+type="required"
+versionRange="[${ae2_version},)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="jei"
+type="optional"
+versionRange="[${jei_version},)"
+ordering="AFTER"
+side="CLIENT"

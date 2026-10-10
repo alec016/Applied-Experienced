@@ -2,8 +2,9 @@ package es.degrassi.appex.me.key;
 
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
+import appeng.api.storage.AEKeyFilter;
+import com.mojang.serialization.MapCodec;
 import es.degrassi.appex.AppliedExperienced;
-import es.degrassi.appex.definition.AExpText;
 import es.degrassi.experiencelib.api.ExperienceStack;
 import es.degrassi.experiencelib.common.definition.ExperienceLibText;
 import lombok.Getter;
@@ -19,12 +20,22 @@ import java.util.List;
 
 @Getter
 public class ExperienceKey extends AEKey {
+  public static final MapCodec<ExperienceKey> MAP_CODEC = MapCodec.unit(ExperienceKey.KEY);
   public static final ExperienceKey KEY = new ExperienceKey();
   public static final long MAX_EXPERIENCE = 10_000;
 
   private static final Identifier ID = AppliedExperienced.id("experience");
 
+  private static final ExperienceStack stack = new ExperienceStack(1);
   private ExperienceKey() {}
+
+  public static boolean is(AEKey what) {
+    return what instanceof ExperienceKey;
+  }
+
+  public static AEKeyFilter filter() {
+    return ExperienceKey::is;
+  }
 
   @Override
   public AEKeyType getType() {
@@ -32,8 +43,8 @@ public class ExperienceKey extends AEKey {
   }
 
   @Override
-  public AEKey dropSecondary() {
-    return this;
+  public ExperienceKey dropSecondary() {
+    return KEY;
   }
 
   @Override
@@ -43,7 +54,8 @@ public class ExperienceKey extends AEKey {
 
   @Override
   public Object getPrimaryKey() {
-    return new ExperienceStack(1);
+    // return this;
+    return stack;
   }
 
   @Override

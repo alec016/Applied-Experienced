@@ -92,6 +92,7 @@ public abstract class AExpTags {
 
   public static final class Items extends Tag<Item> {
     public static final TagKey<Item> CURIO = new Items(Identifier.parse("curios:curio")).get();
+    public static TagKey<Item> XP_P2P = new Items("p2p_attunements/experience_p2p_tunnel", "Experience P2P attunement").get();
     public Items(String name) {
       this(true, name, null);
     }

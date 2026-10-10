@@ -26,6 +26,7 @@ import es.degrassi.appex.me.key.ExperienceKeyType;
 import es.degrassi.appex.me.misc.GenericStackExperienceStorage;
 import es.degrassi.appex.me.strategy.AExpHandlerStrategy;
 import es.degrassi.appex.me.strategy.ExperienceContainerItemStrategy;
+import es.degrassi.appex.me.strategy.StorageIOStrategies;
 import es.degrassi.appex.part.ExperienceAcceptorPart;
 import es.degrassi.appex.part.ExperienceP2PTunnelPart;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
@@ -60,15 +61,9 @@ public class AppliedExperienced {
     StorageCells.addCellHandler(ExperienceCellHandler.INSTANCE);
     bus.addListener(AExpItems::initCellUpgrades);
 
-    StackWorldBehaviors.registerImportStrategy(ExperienceKeyType.TYPE,
-        (level, fromPos, fromSide) ->
-            new StorageImportStrategy<>(ExperienceLibCapabilities.EXPERIENCE.block(), AExpHandlerStrategy.EXPERIENCE, level, fromPos, fromSide));
-    StackWorldBehaviors.registerExportStrategy(ExperienceKeyType.TYPE,
-        (level, fromPos, fromSide) ->
-            new StorageExportStrategy<>(ExperienceLibCapabilities.EXPERIENCE.block(), AExpHandlerStrategy.EXPERIENCE, level, fromPos, fromSide));
-    StackWorldBehaviors.registerExternalStorageStrategy(ExperienceKeyType.TYPE,
-        (level, fromPos, fromSide) ->
-            new ForgeExternalStorageStrategy<>(ExperienceLibCapabilities.EXPERIENCE.block(), AExpHandlerStrategy.EXPERIENCE, level, fromPos, fromSide));
+    StackWorldBehaviors.registerImportStrategy(ExperienceKeyType.TYPE, StorageIOStrategies::createImport);
+    StackWorldBehaviors.registerExportStrategy(ExperienceKeyType.TYPE, StorageIOStrategies::createExport);
+    StackWorldBehaviors.registerExternalStorageStrategy(ExperienceKeyType.TYPE, StorageIOStrategies::createExternalStorage);
 
     ContainerItemStrategy.register(ExperienceKeyType.TYPE, ExperienceKey.class, new ExperienceContainerItemStrategy());
     GenericSlotCapacities.register(ExperienceKeyType.TYPE, ExperienceKey.MAX_EXPERIENCE);

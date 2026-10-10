@@ -5,7 +5,6 @@ import appeng.api.stacks.AEKeyType;
 import appeng.api.stacks.AEKeyTypes;
 import com.mojang.serialization.MapCodec;
 import es.degrassi.appex.AppliedExperienced;
-import es.degrassi.appex.definition.AExpText;
 import es.degrassi.experiencelib.common.definition.ExperienceLibText;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class ExperienceKeyType extends AEKeyType {
   public static final AEKeyType TYPE = new ExperienceKeyType();
-  private static final MapCodec<ExperienceKey> MAP_CODEC = MapCodec.unit(ExperienceKey.KEY);
 
   public static void register(RegisterEvent event) {
     if (event.getRegistryKey().equals(Registries.ITEM)) {
@@ -27,7 +25,7 @@ public class ExperienceKeyType extends AEKeyType {
   }
 
   public MapCodec<? extends AEKey> codec() {
-    return MAP_CODEC;
+    return ExperienceKey.MAP_CODEC;
   }
 
   public int getAmountPerOperation() {

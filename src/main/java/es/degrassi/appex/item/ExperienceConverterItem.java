@@ -1,12 +1,15 @@
 package es.degrassi.appex.item;
 
+import es.degrassi.appex.api.item.ICreativeTabItem;
 import es.degrassi.appex.block.ExperienceConverterBlock;
 import es.degrassi.appex.definition.AExpComponents;
+import es.degrassi.appex.definition.AExpConfig;
 import es.degrassi.appex.definition.AExpText;
 import es.degrassi.experiencelib.common.ExperienceLibRegistration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -17,14 +20,23 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @SuppressWarnings("deprecation")
-public class ExperienceConverterItem extends BlockItem {
+public class ExperienceConverterItem extends BlockItem implements ICreativeTabItem {
   public ExperienceConverterItem(ExperienceConverterBlock block, Properties properties) {
     super(
         block,
-        properties.component(ExperienceLibRegistration.EXPERIENCE_COMPONENT, 0L)
+        properties.component(ExperienceLibRegistration.EXPERIENCE_COMPONENT.get(), 0L)
             .component(AExpComponents.IN_INV, ItemContainerContents.fromItems(List.of(ItemStack.EMPTY)))
             .component(AExpComponents.OUT_INV, ItemContainerContents.fromItems(List.of(ItemStack.EMPTY)))
     );
+  }
+
+  @Override
+  public void addToMainCreativeTab(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
+    output.accept(this);
+
+    var charged = new ItemStack(this, 1);
+    charged.set(ExperienceLibRegistration.EXPERIENCE_COMPONENT, AExpConfig.get().XP_CONVERTER_CAPACITY.get());
+    output.accept(charged);
   }
 
   @Override

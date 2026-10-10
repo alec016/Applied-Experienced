@@ -1,0 +1,6 @@
+{
+  "includes": [
+    "../terminals/experience_access_terminal.json",
+    "universal_terminal.json"
+  ]
+}

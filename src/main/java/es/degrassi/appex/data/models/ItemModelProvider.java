@@ -56,6 +56,7 @@ public class ItemModelProvider extends ModelSubProvider {
                 .put(FRONT_MEDIUM, makeMaterial("part/experience_access_terminal_medium"))
                 .put(FRONT_DARK, makeMaterial("part/experience_access_terminal_dark")),
             modelOutput);
+    flatSingleLayer(AExpItems.EXPERIENCE_TERMINAL, "item/wireless_experience_access_terminal");
   }
 
   private void flatSingleLayer(ItemLike item, String texture) {

@@ -161,7 +161,7 @@ dependencies {
   }
 
   jarJar(implementation("de.mari_023:ae2wtlib_api:${ae2wtlib_version}") { transitive = false })
-  localRuntime("de.mari_023:ae2wtlib:${ae2wtlib_version}")
+  implementation("de.mari_023:ae2wtlib:${ae2wtlib_version}")
 
   compileOnly localRuntime ("dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.6")
 

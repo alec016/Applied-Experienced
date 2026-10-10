@@ -12,6 +12,8 @@ import es.degrassi.appex.network.client.CExperienceButtonClickedInPartPacket;
 import guideme.color.ConstantColor;
 import guideme.document.LytRect;
 import guideme.render.SimpleRenderContext;
+import lombok.AccessLevel;
+import lombok.Getter;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,6 +31,7 @@ public class ExperienceAccessTermScreen<C extends ExperienceAccessTermMenu> exte
 
   private static final int ROW_HEIGHT = 18;
 
+  @Getter(AccessLevel.PROTECTED)
   private int visibleRows = 0;
 
   public ExperienceAccessTermScreen(C menu, Inventory playerInventory, Component title, ScreenStyle style) {

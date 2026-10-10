@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_expt": {
+      "conditions": {
+        "items": [
+          {
+            "items": "appex:experience_access_terminal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "appex:wireless_experience_access_terminal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wt": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ae2:wireless_terminal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wt",
+      "has_expt"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "appex:wireless_experience_access_terminal"
+    ]
+  }
+}

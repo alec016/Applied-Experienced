@@ -46,6 +46,13 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies."${mod_id}"]]
+modId="ae2wtlib"
+type="required"
+versionRange="[${ae2wtlib_version},)"
+ordering="BEFORE"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
 modId="jei"
 type="optional"
 versionRange="[${jei_version},)"

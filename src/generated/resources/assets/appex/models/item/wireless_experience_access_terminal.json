@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "appex:item/wireless_experience_access_terminal"
+  }
+}

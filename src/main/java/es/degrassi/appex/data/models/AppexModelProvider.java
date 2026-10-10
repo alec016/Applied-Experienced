@@ -22,13 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public final class AppexModelProvider extends ModelProvider implements DataProvider {
   private final PackOutput.PathProvider partOutput;
-  private final PackOutput.PathProvider partModelOutput;
   @Nullable
   private AEPartModelCollector partModelCollector;
 
@@ -50,7 +48,6 @@ public final class AppexModelProvider extends ModelProvider implements DataProvi
     super(packOutput, modid);
     this.subProviders = subProviders;
     this.partOutput = packOutput.createPathProvider(PackOutput.Target.RESOURCE_PACK, "ae2/parts");
-    this.partModelOutput = packOutput.createPathProvider(PackOutput.Target.RESOURCE_PACK, "models/part");
   }
 
   @Override

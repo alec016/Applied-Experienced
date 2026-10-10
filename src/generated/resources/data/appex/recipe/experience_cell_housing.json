@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": "minecraft:experience_bottle",
+    "Q": "ae2:quartz_glass",
+    "R": "#c:dusts/redstone"
+  },
+  "pattern": [
+    "QRQ",
+    "R R",
+    "OOO"
+  ],
+  "result": {
+    "id": "appex:experience_cell_housing"
+  }
+}

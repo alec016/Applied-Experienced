@@ -10,10 +10,15 @@ import appeng.core.localization.GuiText;
 import appeng.items.AEBaseItem;
 import appeng.items.materials.MaterialItem;
 import appeng.items.storage.StorageTier;
+import de.mari_023.ae2wtlib.api.gui.Icon;
+import de.mari_023.ae2wtlib.api.registration.AddTerminalEvent;
 import es.degrassi.appex.AppliedExperienced;
 import es.degrassi.appex.api.item.ICreativeTabItem;
 import es.degrassi.appex.item.ExperiencePortableCellItem;
 import es.degrassi.appex.item.ExperienceStorageCell;
+import es.degrassi.appex.weat.ItemWeat;
+import es.degrassi.appex.weat.WeatMenu;
+import es.degrassi.appex.weat.WeatMenuHost;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +30,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +52,19 @@ public final class AExpItems {
   public static void initialize(IEventBus bus) {
     TABS.register(bus);
     DR.register(bus);
+    bus.addListener(RegisterEvent.class, event -> {
+      if (event.getRegistryKey().equals(Registries.ITEM)) {
+        AddTerminalEvent.register(ev -> {
+          ev.builder(
+              "experience_access",
+              WeatMenuHost::new,
+              WeatMenu.TYPE,
+              AExpItems.EXPERIENCE_TERMINAL.asItem(),
+              new Icon(0, 0, 16, 16, new Icon.Texture(AppliedExperienced.id("textures/guis/wireless_icon.png"), 16, 16))
+          ).addTerminal();
+        });
+      }
+    });
   }
 
   private static Item basic(Item.Properties p) {
@@ -82,6 +101,12 @@ public final class AExpItems {
       "ME Experience Cell Housing",
       "experience_cell_housing",
       AExpItems::basic
+  );
+
+  public static final ItemDefinition<ItemWeat> EXPERIENCE_TERMINAL = item(
+      "Wireless Experience Access Terminal",
+      "wireless_experience_access_terminal",
+      ItemWeat::new
   );
 
   public static final ItemDefinition<ExperienceStorageCell> EXPERIENCE_CELL_1K = cell(StorageTier.SIZE_1K);

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "ae2:wireless_receiver",
+    "b": "appex:experience_access_terminal",
+    "c": "ae2:dense_energy_cell"
+  },
+  "pattern": [
+    "a",
+    "b",
+    "c"
+  ],
+  "result": {
+    "id": "appex:wireless_experience_access_terminal"
+  }
+}

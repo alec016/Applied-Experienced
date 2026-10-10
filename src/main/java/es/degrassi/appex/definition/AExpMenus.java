@@ -12,6 +12,8 @@ import es.degrassi.appex.client.container.ExperienceAccessTermMenu;
 import es.degrassi.appex.client.container.ExperienceConverterContainer;
 import es.degrassi.appex.client.screen.ExperienceAccessTermScreen;
 import es.degrassi.appex.client.screen.ExperienceConverterScreen;
+import es.degrassi.appex.weat.WeatMenu;
+import es.degrassi.appex.weat.WeatScreen;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.world.inventory.MenuType;
@@ -53,6 +55,7 @@ public final class AExpMenus {
           ExperienceAccessTermScreen::new,
           "/screens/terminals/experience_access_terminal.json"
       );
+      InitScreens.register(event, WeatMenu.TYPE, WeatScreen::new, "/screens/wtlib/wireless_experience_access_terminal.json");
     });
   }
 }

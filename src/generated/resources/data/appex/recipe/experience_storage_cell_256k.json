@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "appex:experience_cell_housing",
+    "ae2:cell_component_256k"
+  ],
+  "result": {
+    "id": "appex:experience_storage_cell_256k"
+  }
+}

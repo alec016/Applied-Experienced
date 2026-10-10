@@ -33,7 +33,8 @@ public class CraftingRecipes extends AppexRecipeProvider {
         .define('Q', AEBlocks.QUARTZ_GLASS)
         .define('R', Tags.Items.DUSTS_REDSTONE)
         .define('O', Items.EXPERIENCE_BOTTLE)
-        .unlockedBy("has_dusts/redstone", has(Tags.Items.DUSTS_REDSTONE));
+        .unlockedBy("has_dusts/redstone", has(Tags.Items.DUSTS_REDSTONE))
+        .save(output);
 
     shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_CONVERTER)
         .pattern("ppp")
@@ -43,7 +44,8 @@ public class CraftingRecipes extends AppexRecipeProvider {
         .define('d', AEItems.CELL_COMPONENT_64K)
         .define('c', TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.parse("c:glass_panes")))
         .define('e', Items.EXPERIENCE_BOTTLE)
-        .unlockedBy("has_experince_bottle", has(Items.EXPERIENCE_BOTTLE));
+        .unlockedBy("has_experince_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output);
 
     shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_ACCEPTOR)
         .pattern("ede")
@@ -52,7 +54,8 @@ public class CraftingRecipes extends AppexRecipeProvider {
         .define('a', AEBlocks.ENERGY_ACCEPTOR)
         .define('d', AEItems.CELL_COMPONENT_1K)
         .define('e', Items.EXPERIENCE_BOTTLE)
-        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE));
+        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output);
 
     shaped(RecipeCategory.MISC, AExpBlocks.EXPERIENCE_ACCEPTOR)
         .pattern("ded")
@@ -81,13 +84,25 @@ public class CraftingRecipes extends AppexRecipeProvider {
         .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
         .save(output, makeId("network/parts/terminals_experience_access"));
 
+    shaped(RecipeCategory.MISC, AExpItems.EXPERIENCE_TERMINAL)
+        .pattern("a")
+        .pattern("b")
+        .pattern("c")
+        .define('a', AEItems.WIRELESS_RECEIVER)
+        .define('b', AExpParts.EXPERIENCE_ACCESS_TERMINAL)
+        .define('c', AEBlocks.DENSE_ENERGY_CELL.asItem())
+        .unlockedBy("has_wt", has(AEItems.WIRELESS_TERMINAL))
+        .unlockedBy("has_expt", has(AExpParts.EXPERIENCE_ACCESS_TERMINAL))
+        .save(output);
+
     AExpItems.getCells().forEach(cell -> {
       var component = cellComponent(cell.get().getTier());
       shapeless(RecipeCategory.MISC, cell)
           .requires(housing)
           .requires(component)
           .unlockedBy("has_cell_component_" + cell.get().getTier().namePrefix(), has(cell))
-          .unlockedBy("has_experience_housing", has(housing));
+          .unlockedBy("has_experience_housing", has(housing))
+          .save(output);
     });
 
     AExpItems.getPortables().forEach(cell -> {

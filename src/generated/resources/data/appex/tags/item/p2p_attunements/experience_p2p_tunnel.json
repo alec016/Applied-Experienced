@@ -1,6 +1,7 @@
 {
   "values": [
     "appex:experience_cell_housing",
+    "appex:wireless_experience_access_terminal",
     "appex:experience_storage_cell_1k",
     "appex:experience_storage_cell_4k",
     "appex:experience_storage_cell_16k",

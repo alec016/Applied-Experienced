@@ -3,6 +3,7 @@
   "block.appex.experience_converter": "Experience Tank",
   "item.appex.cable_experience_acceptor": "ME Cable Experience Acceptor",
   "item.appex.experience_acceptor": "ME Experience Acceptor",
+  "item.appex.experience_access_terminal": "ME Experience Access Terminal",
   "item.appex.experience_cell_housing": "ME Experience Cell Housing",
   "item.appex.experience_converter": "Experience Tank",
   "item.appex.experience_p2p_tunnel": "Experience P2P Tunnel",
@@ -24,6 +25,7 @@
   "text.appex.gui.element.experience_invert_button.inverted": "Click to extract xp from Experience Bottles",
   "text.appex.gui.element.experience_invert_button.to_invert": "Click to insert xp to Glass Bottles",
   "text.appex.gui.title.experience_converter": "Experience Tank",
+  "text.appex.gui.title.xpAccessTerminalShort": "Experience A. Terminal",
   "text.appex.item.converter.inv": "Stored %s",
   "text.appex.item.converter.tooltip": "Stored: %s XP",
   "text.appex.p2p_attunement.experrience": "Portable Experience Storage (i.e. XP Bottle, Glass Bottle, XP Tanks)"

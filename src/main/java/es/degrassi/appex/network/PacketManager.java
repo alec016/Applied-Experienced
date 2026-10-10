@@ -1,6 +1,7 @@
 package es.degrassi.appex.network;
 
 import es.degrassi.appex.AppliedExperienced;
+import es.degrassi.appex.network.client.CExperienceButtonClickedInPartPacket;
 import es.degrassi.appex.network.client.CExperienceButtonClickedPacket;
 import es.degrassi.appex.network.client.CInvertExperienceButtonClickedPacket;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,6 +18,7 @@ public class PacketManager {
 
     // TO SERVER
     registrar.playToServer(CExperienceButtonClickedPacket.TYPE, CExperienceButtonClickedPacket.CODEC, CExperienceButtonClickedPacket::handle);
+    registrar.playToServer(CExperienceButtonClickedInPartPacket.TYPE, CExperienceButtonClickedInPartPacket.CODEC, CExperienceButtonClickedInPartPacket::handle);
     registrar.playToServer(CInvertExperienceButtonClickedPacket.TYPE, CInvertExperienceButtonClickedPacket.CODEC, CInvertExperienceButtonClickedPacket::handle);
   }
 }

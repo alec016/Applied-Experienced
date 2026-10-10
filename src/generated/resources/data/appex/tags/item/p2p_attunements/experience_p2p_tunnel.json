@@ -13,6 +13,7 @@
     "appex:portable_experience_cell_256k",
     "appex:cable_experience_acceptor",
     "appex:experience_p2p_tunnel",
+    "appex:experience_access_terminal",
     "appex:experience_converter",
     "appex:experience_acceptor"
   ]

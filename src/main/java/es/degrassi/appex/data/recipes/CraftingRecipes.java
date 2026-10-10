@@ -1,5 +1,6 @@
 package es.degrassi.appex.data.recipes;
 
+import appeng.core.ConventionTags;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.items.storage.StorageTier;
@@ -72,6 +73,13 @@ public class CraftingRecipes extends AppexRecipeProvider {
         .requires(AExpParts.EXPERIENCE_ACCEPTOR)
         .unlockedBy("has_experience_acceptor", has(AExpParts.EXPERIENCE_ACCEPTOR))
         .save(output, makeId("experience_acceptor_from_part"));
+
+    shapeless(RecipeCategory.MISC, AExpParts.EXPERIENCE_ACCESS_TERMINAL)
+        .requires(ConventionTags.ILLUMINATED_PANEL)
+        .requires(AEItems.ENGINEERING_PROCESSOR)
+        .requires(Items.EXPERIENCE_BOTTLE)
+        .unlockedBy("has_experience_bottle", has(Items.EXPERIENCE_BOTTLE))
+        .save(output, makeId("network/parts/terminals_experience_access"));
 
     AExpItems.getCells().forEach(cell -> {
       var component = cellComponent(cell.get().getTier());

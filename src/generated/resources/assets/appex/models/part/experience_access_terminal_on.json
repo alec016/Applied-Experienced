@@ -1,0 +1,8 @@
+{
+  "parent": "ae2:part/pattern_access_terminal_on",
+  "textures": {
+    "lightsBright": "appex:part/experience_access_terminal_bright",
+    "lightsDark": "appex:part/experience_access_terminal_dark",
+    "lightsMedium": "appex:part/experience_access_terminal_medium"
+  }
+}

@@ -7,6 +7,7 @@ import appeng.items.parts.PartItem;
 import es.degrassi.appex.AppliedExperienced;
 import es.degrassi.appex.part.ExperienceAcceptorPart;
 import es.degrassi.appex.part.ExperienceP2PTunnelPart;
+import es.degrassi.appex.part.reporting.ExperienceAccessTerminalPart;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.resources.Identifier;
@@ -29,6 +30,13 @@ public final class AExpParts {
       AppliedExperienced.id("experience_p2p_tunnel"),
       ExperienceP2PTunnelPart.class,
       ExperienceP2PTunnelPart::new
+  );
+
+  public static final ItemDefinition<PartItem<ExperienceAccessTerminalPart>> EXPERIENCE_ACCESS_TERMINAL = createPart(
+      "ME Experience Access Terminal",
+      AppliedExperienced.id("experience_access_terminal"),
+      ExperienceAccessTerminalPart.class,
+      ExperienceAccessTerminalPart::new
   );
 
   private static <T extends IPart> ItemDefinition<PartItem<T>> createPart(

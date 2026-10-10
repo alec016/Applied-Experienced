@@ -6,6 +6,7 @@
 - Change xp converter to xp tank
     - Extracts and inserts xp from to xp bottles (Bottles o'Enchanting)
 - Add Experience p2p (works same way as energy p2p)
+- Add Experience Access Terminal (Now is not required to use the experience tank to extract insert xp from-to system)
 ---
 ### KNOWN ISSUES
 - On world load xp tanks does not render properly the amounts in the entity rendering (well, does not render it until the internal amount changes)

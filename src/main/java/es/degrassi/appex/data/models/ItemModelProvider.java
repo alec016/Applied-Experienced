@@ -22,7 +22,6 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplate;
 
 public class ItemModelProvider extends ModelSubProvider {
   public ItemModelProvider(BlockModelGenerators blockModels, ItemModelGenerators itemModels, PartModelOutput partModels) {
@@ -31,6 +30,9 @@ public class ItemModelProvider extends ModelSubProvider {
 
   private static final TextureSlot P2P_TYPE = TextureSlot.create("type");
   private static final TextureSlot FRONT = TextureSlot.create("front");
+  private static final TextureSlot FRONT_BRIGHT = TextureSlot.create("front_bright");
+  private static final TextureSlot FRONT_MEDIUM = TextureSlot.create("front_medium");
+  private static final TextureSlot FRONT_DARK = TextureSlot.create("front_dark");
 
   @Override
   protected void register() {
@@ -46,6 +48,14 @@ public class ItemModelProvider extends ModelSubProvider {
         .create(AExpParts.EXPERIENCE_ACCEPTOR.asItem(),
             TextureMapping.particle(AExpBlocks.EXPERIENCE_ACCEPTOR.block())
                 .put(FRONT, makeMaterial("block/experience_acceptor")), modelOutput);
+    withParent(AppEng.makeId("item/display_base"), FRONT, FRONT_BRIGHT, FRONT_MEDIUM, FRONT_DARK)
+        .create(AExpParts.EXPERIENCE_ACCESS_TERMINAL.asItem(),
+            TextureMapping.particle(new Material(AExpParts.EXPERIENCE_ACCESS_TERMINAL.id().withPrefix("item")))
+                .put(FRONT, makeMaterial("part/experience_access_terminal"))
+                .put(FRONT_BRIGHT, makeMaterial("part/experience_access_terminal_bright"))
+                .put(FRONT_MEDIUM, makeMaterial("part/experience_access_terminal_medium"))
+                .put(FRONT_DARK, makeMaterial("part/experience_access_terminal_dark")),
+            modelOutput);
   }
 
   private void flatSingleLayer(ItemLike item, String texture) {

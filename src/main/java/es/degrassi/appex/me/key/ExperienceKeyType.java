@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class ExperienceKeyType extends AEKeyType {
+  public static final MapCodec<ExperienceKey> MAP_CODEC = MapCodec.unit(ExperienceKey.KEY);
   public static final AEKeyType TYPE = new ExperienceKeyType();
 
   public static void register(RegisterEvent event) {
@@ -25,7 +26,7 @@ public class ExperienceKeyType extends AEKeyType {
   }
 
   public MapCodec<? extends AEKey> codec() {
-    return ExperienceKey.MAP_CODEC;
+    return MAP_CODEC;
   }
 
   public int getAmountPerOperation() {

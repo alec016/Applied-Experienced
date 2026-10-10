@@ -16,7 +16,9 @@ public enum AExpText implements LocalizationEnum {
   EXPERIENCE_BUTTON_EXTRACT("gui.element.experience_button.extract", "Extract: %s %s"),
   EXPERIENCE_INVERT_BUTTON_TRUE("gui.element.experience_invert_button.inverted", "Click to extract xp from Experience Bottles"),
   EXPERIENCE_INVERT_BUTTON_FALSE("gui.element.experience_invert_button.to_invert", "Click to insert xp to Glass Bottles"),
-  P2PAttunementExperience("p2p_attunement.experrience", "Portable Experience Storage (i.e. XP Bottle, Glass Bottle, XP Tanks)");
+  P2PAttunementExperience("p2p_attunement.experrience", "Portable Experience Storage (i.e. XP Bottle, Glass Bottle, XP Tanks)"),
+  ExperienceAccessTerminalShort("gui.title.xpAccessTerminalShort", "Experience A. Terminal")
+  ;
 
   public final String key;
   @Getter

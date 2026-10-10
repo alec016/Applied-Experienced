@@ -2,7 +2,7 @@ package es.degrassi.appex.network.client;
 
 import es.degrassi.appex.AppliedExperienced;
 import es.degrassi.appex.block.entity.ExperienceConverterEntity;
-import es.degrassi.appex.client.screen.ExperienceConverterScreen.Amount;
+import es.degrassi.appex.client.Amount;
 import es.degrassi.experiencelib.util.ExperienceUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;

@@ -1,0 +1,59 @@
+{
+  "includes": [
+    "../common/common.json",
+    "../common/player_inventory.json"
+  ],
+  "background": {
+    "texture": "appex:textures/guis/experienceaccessterminal.png",
+    "srcRect": [0, 0, 176, 189]
+  },
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "text.appex.gui.title.xpAccessTerminalShort"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+  "widgets": {
+    "experience": {
+      "top": 30,
+      "left": 10
+    },
+    "insert_one": {
+      "top": 58,
+      "left": 9
+    },
+    "insert_ten": {
+      "top": 58,
+      "left": 27
+    },
+    "insert_hundred": {
+      "top": 58,
+      "left": 45
+    },
+    "insert_all": {
+      "top": 58,
+      "left": 63
+    },
+    "extract_one": {
+      "top": 58,
+      "left": 97
+    },
+    "extract_ten": {
+      "top": 58,
+      "left": 115
+    },
+    "extract_hundred": {
+      "top": 58,
+      "left": 133
+    },
+    "extract_all": {
+      "top": 58,
+      "left": 151
+    }
+  }
+}

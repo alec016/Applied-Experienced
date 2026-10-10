@@ -3,7 +3,6 @@ package es.degrassi.appex.me.key;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.storage.AEKeyFilter;
-import com.mojang.serialization.MapCodec;
 import es.degrassi.appex.AppliedExperienced;
 import es.degrassi.experiencelib.api.ExperienceStack;
 import es.degrassi.experiencelib.common.definition.ExperienceLibText;
@@ -20,7 +19,6 @@ import java.util.List;
 
 @Getter
 public class ExperienceKey extends AEKey {
-  public static final MapCodec<ExperienceKey> MAP_CODEC = MapCodec.unit(ExperienceKey.KEY);
   public static final ExperienceKey KEY = new ExperienceKey();
   public static final long MAX_EXPERIENCE = 10_000;
 

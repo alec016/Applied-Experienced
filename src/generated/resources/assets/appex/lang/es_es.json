@@ -23,6 +23,7 @@
   "text.appex.gui.element.experience_invert_button.inverted": "Click para extraer xp desde las Botellas de Experiencia",
   "text.appex.gui.element.experience_invert_button.to_invert": "Click para insertar xp a Botellas de Cristal",
   "text.appex.gui.title.experience_converter": "Tanque de Experiencia",
+  "text.appex.gui.title.xpAccessTerminalShort": "Experience A. Terminal",
   "text.appex.item.converter.inv": "Almacenado %s",
   "text.appex.item.converter.tooltip": "Almacenado: %s XP",
   "text.appex.p2p_attunement.experrience": "Almacenamiento de Experiencia Portable (i.e. Botellas de Experiencia, Botellas de Cristal, Tanques de Experiencia)"

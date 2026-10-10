@@ -138,9 +138,11 @@ dependencies {
   // lombok
   compileOnly "org.projectlombok:lombok:${project.lombok_version}"
   annotationProcessor "org.projectlombok:lombok:${project.lombok_version}"
+  implementation "net.neoforged:neoforge:${neo_version}"
   compileOnly localRuntime ("es.degrassi:experiencelib:${mc_base_version}-${experiencelib_version}")
 
   // Addons for testing
+  compileOnly localRuntime("org.appliedenergistics:guideme:${guideme_version}")
   compileOnly localRuntime("org.appliedenergistics:appliedenergistics2:${ae2_version}")
 
   // JEI
@@ -158,7 +160,10 @@ dependencies {
       break
   }
 
-  // compileOnly localRuntime ("dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.6")
+  jarJar(implementation("de.mari_023:ae2wtlib_api:${ae2wtlib_version}") { transitive = false })
+  localRuntime("de.mari_023:ae2wtlib:${ae2wtlib_version}")
+
+  compileOnly localRuntime ("dev.latvian.mods:kubejs-neoforge:26.1.2-8.0.6")
 
   // ExperienceFluids
   // localRuntime("curse.maven:mob-grinding-utils-254241:${project.MGU}")
@@ -185,6 +190,8 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     icon                   : icon,
     ae2_version            : ae2_version,
     experiencelib_version  : experiencelib_version,
+    ae2wtlib_version       : ae2wtlib_version,
+    jei_version            : jei_version
   ]
   inputs.properties replaceProperties
   expand replaceProperties

@@ -18,5 +18,7 @@ public interface IExperienceInvHost {
 
   long getExperienceCapacity();
 
-  boolean isInverted();
+  default boolean isInverted() {
+    return false;
+  }
 }

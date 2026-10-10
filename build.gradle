@@ -290,6 +290,8 @@ unifiedPublishingWithMMRBot {
         relations {
           depends "applied-energistics-2"
           depends "experiencelib"
+          depends "applied-energistics-2-wireless-terminals"
+          optional "jei"
         }
       }
     }
@@ -303,6 +305,8 @@ unifiedPublishingWithMMRBot {
         relations {
           depends "ae2"
           depends "experiencelib"
+          depends "applied-energistics-2-wireless-terminals"
+          optional "jei"
         }
       }
     }

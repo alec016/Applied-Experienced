@@ -23,10 +23,10 @@ import es.degrassi.appex.definition.AExpTags;
 import es.degrassi.appex.util.inv.filter.ApexItemFilters;
 import es.degrassi.experiencelib.api.ExperienceResource;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
-import es.degrassi.experiencelib.api.network.ISyncable;
 import es.degrassi.experiencelib.api.network.ISyncableHandler;
 import es.degrassi.experiencelib.api.network.ISyncableStuff;
-import es.degrassi.experiencelib.api.network.syncable.BooleanSyncable;
+import es.degrassi.experiencelib.api.network.Syncable;
+import es.degrassi.experiencelib.api.network.SyncableList;
 import es.degrassi.experiencelib.common.ExperienceLibRegistration;
 import es.degrassi.experiencelib.transfer.ItemAccessExperienceHandler;
 import es.degrassi.experiencelib.transfer.SimpleExperienceHandler;
@@ -59,12 +59,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ExperienceConverterEntity extends BlockEntity implements ServerTickingBlockEntity, IActionHost, InternalInventoryHost, IExperienceInvHost,
-    ISyncableHandler, ISyncableStuff {
+public class ExperienceConverterEntity extends BlockEntity implements ServerTickingBlockEntity, IActionHost,
+    InternalInventoryHost, IExperienceInvHost, ISyncableHandler, ISyncableStuff {
   private static final String EXPERIENCE_TANK = "experienceTank";
   private static final String INVENTORY = "inv";
   private boolean setChangedQueued = false;
@@ -72,7 +71,8 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
   private boolean isInverted = false;
   private boolean initialized = false;
   @Getter
-  protected final List<ISyncable<?, ?>> stuffToSync = new ArrayList<>();
+  private final List<Syncable<?>> stuffToSync = new ArrayList<>();
+  protected final SyncableList list = new SyncableList(stuffToSync);
   private final AppEngInternalInventory inventoryIn;
   private final AppEngInternalInventory inventoryOut;
   @Getter
@@ -150,15 +150,15 @@ public class ExperienceConverterEntity extends BlockEntity implements ServerTick
 
   private void init() {
     if (initialized) return;
-    getStuffToSync().clear();
-    experienceTank.getStuffToSync(stuffToSync::add);
-    getStuffToSync(stuffToSync::add);
+    stuffToSync.clear();
+    experienceTank.getStuffToSync(list);
+    getStuffToSync(list);
     initialized = true;
   }
 
   @Override
-  public void getStuffToSync(Consumer<ISyncable<?, ?>> container) {
-    container.accept(BooleanSyncable.create(this::isInverted, this::setInverted));
+  public void getStuffToSync(SyncableList container) {
+    container.syncBool(this::isInverted, this::setInverted);
   }
 
   @Override

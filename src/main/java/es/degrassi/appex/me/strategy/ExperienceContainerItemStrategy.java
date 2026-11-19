@@ -9,6 +9,7 @@ import es.degrassi.experiencelib.api.ExperienceResource;
 import es.degrassi.experiencelib.api.capability.ExperienceLibCapabilities;
 import es.degrassi.experiencelib.api.capability.IExperienceHandler;
 import es.degrassi.experiencelib.common.ExperienceLibRegistration;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -61,12 +62,12 @@ public class ExperienceContainerItemStrategy implements ContainerItemStrategy<Ex
 
   @Override
   public void playFillSound(Player player, ExperienceKey what) {
-
+    player.playSound(SoundEvents.BOTTLE_FILL);
   }
 
   @Override
   public void playEmptySound(Player player, ExperienceKey what) {
-
+    player.playSound(SoundEvents.BOTTLE_EMPTY);
   }
 
   @Override

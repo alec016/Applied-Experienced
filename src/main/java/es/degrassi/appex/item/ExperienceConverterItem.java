@@ -51,10 +51,10 @@ public class ExperienceConverterItem extends BlockItem implements ICreativeTabIt
     if (inContents.getSlots() > 0) {
       s = inContents.getStackInSlot(0);
     }
-    builder.accept(AExpText.CONVERTER_INV.text(inContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : "Empty").withStyle(ChatFormatting.DARK_GRAY));
+    builder.accept(AExpText.CONVERTER_INV.text(inContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : AExpText.Empty.text()).withStyle(ChatFormatting.DARK_GRAY));
     if (outContents.getSlots() > 0) {
       s = outContents.getStackInSlot(0);
     }
-    builder.accept(AExpText.CONVERTER_INV.text(outContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : "Empty").withStyle(ChatFormatting.DARK_GRAY));
+    builder.accept(AExpText.CONVERTER_INV.text(outContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : AExpText.Empty.text()).withStyle(ChatFormatting.DARK_GRAY));
   }
 }

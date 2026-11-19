@@ -55,7 +55,7 @@ public class ExperiencePortableCellItem extends AbstractPortableCell implements 
 
   @Override
   public long getTotalBytes() {
-    return 50 * (long) Math.pow(4, tier.index() - 1);
+    return tier.bytes();
   }
 
   @Override

@@ -1,6 +1,5 @@
 package es.degrassi.appex.me.strategy;
 
-import appeng.api.behaviors.ExternalStorageStrategy;
 import appeng.parts.automation.ForgeExternalStorageStrategy;
 import appeng.parts.automation.StorageExportStrategy;
 import appeng.parts.automation.StorageImportStrategy;

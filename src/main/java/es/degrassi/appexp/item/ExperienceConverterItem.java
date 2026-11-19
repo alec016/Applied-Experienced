@@ -47,10 +47,10 @@ public class ExperienceConverterItem extends BlockItem implements ICreativeTabIt
     if (inContents.getSlots() > 0) {
       s = inContents.getStackInSlot(0);
     }
-    tooltipComponents.add(AExpText.CONVERTER_INV.text(inContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : "Empty"));
+    tooltipComponents.add(AExpText.CONVERTER_INV.text(inContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : AExpText.Empty.text()));
     if (outContents.getSlots() > 0) {
       s = outContents.getStackInSlot(0);
     }
-    tooltipComponents.add(AExpText.CONVERTER_INV.text(outContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : "Empty"));
+    tooltipComponents.add(AExpText.CONVERTER_INV.text(outContents.getSlots() > 0 ? s.getCount() + "x " + s.getHoverName().getString() : AExpText.Empty.text()));
   }
 }

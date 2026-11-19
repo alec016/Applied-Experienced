@@ -22,7 +22,7 @@ public class WeatScreen extends ExperienceAccessTermScreen<WeatMenu> implements 
 
   public void init() {
     super.init();
-    this.upgradesPanel.setMaxRows(Math.max(2, this.getVisibleRows()));
+    this.upgradesPanel.setMaxRows(4);
   }
 
   @Override
@@ -36,7 +36,6 @@ public class WeatScreen extends ExperienceAccessTermScreen<WeatMenu> implements 
   }
 
   public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    boolean value = super.keyPressed(keyCode, scanCode, modifiers);
-    return value || this.checkForTerminalKeys(keyCode, scanCode);
+    return super.keyPressed(keyCode, scanCode, modifiers) || this.checkForTerminalKeys(keyCode, scanCode);
   }
 }

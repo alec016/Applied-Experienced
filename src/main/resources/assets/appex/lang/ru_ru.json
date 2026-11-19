@@ -1,32 +1,35 @@
 {
-  "text.appex.experience": "Опыт",
-  "text.appex.creative_tab": "Applied Experienced",
-  "text.appex.experience_button.insert": "Вставка: %s %s",
-  "text.appex.experience_button.extract": "Извлечение: %s %s",
-  "appex.gui.element.experience.tooltip": "%s / %s",
-  "gui.appex.experience_converter": "Преобразователь опыта",
-
+  "block.appex.experience_acceptor": "МЭ приёмщик опыта",
+  "block.appex.experience_converter": "Резервуар опыта",
+  "item.appex.cable_experience_acceptor": "МЭ приёмщик опыта",
+  "item.appex.experience_acceptor": "МЭ приёмщик опыта",
+  "item.appex.experience_access_terminal": "МЭ терминал доступа к опыту",
   "item.appex.experience_cell_housing": "МЭ корпус для ячейки опыта",
-
+  "item.appex.experience_converter": "Резервуар опыта",
+  "item.appex.experience_p2p_tunnel": "P2P тоннель опыта",
   "item.appex.experience_storage_cell_1k": "1К МЭ ячейка хранения опыта",
   "item.appex.experience_storage_cell_4k": "4К МЭ ячейка хранения опыта",
   "item.appex.experience_storage_cell_16k": "16К МЭ ячейка хранения опыта",
   "item.appex.experience_storage_cell_64k": "64К МЭ ячейка хранения опыта",
   "item.appex.experience_storage_cell_256k": "256К МЭ ячейка хранения опыта",
-
   "item.appex.portable_experience_cell_1k": "1К Переносная ячейка опыта",
   "item.appex.portable_experience_cell_4k": "4К Переносная ячейка опыта",
   "item.appex.portable_experience_cell_16k": "16К Переносная ячейка опыта",
   "item.appex.portable_experience_cell_64k": "64К Переносная ячейка опыта",
   "item.appex.portable_experience_cell_256k": "256К Переносная ячейка опыта",
-
-
-  "item.appex.cable_experience_acceptor": "P2P тоннель опыта",
-
-  "block.appex.experience_acceptor": "МЭ приёмщик опыта",
-  "block.appex.experience_converter": "Преобразователь опыта",
-
-  "appex.item.converter.tooltip": "Запасено: %s опыта",
-  "appex.item.converter.inv.in": "Запасено %s",
-  "appex.item.converter.inv.out": "Запасено %s"
+  "item.appex.wireless_experience_access_terminal": "Беспроводной терминал доступа к опыту",
+  "tag.item.appex.p2p_attunements.experience_p2p_tunnel": "Настройка P2P тоннеля опыта",
+  "text.appex.creative_tab": "Applied Experience",
+  "text.appex.experience": "Опыт",
+  "text.appex.gui.element.experience": "%s / %s",
+  "text.appex.gui.element.experience_button.extract": "Извлечь: %s %s",
+  "text.appex.gui.element.experience_button.insert": "Поместить: %s %s",
+  "text.appex.gui.element.experience_invert_button.inverted": "Нажмите, чтобы извлечь опыт из пузырьков опыта",
+  "text.appex.gui.element.experience_invert_button.to_invert": "Нажмите, чтобы залить опыт в бутылочки",
+  "text.appex.gui.title.experience_converter": "Резервуар опыта",
+  "text.appex.gui.title.xpAccessTerminalShort": "Терминал опыта",
+  "text.appex.item.converter.inv": "Сохранено: %s",
+  "text.appex.item.converter.tooltip": "Сохранено: %s опыта",
+  "text.appex.p2p_attunement.experrience": "Переносные хранилища опыта (например, пузырёк опыта, бутылочка, резервуары опыта)",
+  "text.appex.item.converter.empty": "Пусто"
 }
